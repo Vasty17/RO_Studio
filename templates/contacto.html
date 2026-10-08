@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Ro Studio — Información & Contacto | Coordinación Directa{% endblock %}
+
+{% block content %}
+<div class="flex flex-col w-full relative z-10">
+  <!-- Glowing Background Orbs -->
+  <div class="absolute top-10 left-1/4 w-[450px] h-[450px] rounded-full bg-primary/10 blur-[130px] pointer-events-none -z-10"></div>
+  <div class="absolute top-80 right-10 w-[400px] h-[400px] rounded-full bg-secondary/10 blur-[140px] pointer-events-none -z-10"></div>
+
+  <section class="w-full px-4 sm:px-8 lg:px-12 py-12 lg:py-16">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <!-- Title -->
+      <div class="space-y-3">
+        <div class="inline-flex items-center space-x-2 bg-surface-container/80 border border-primary/25 px-4 py-1.5 rounded-full shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span class="font-label-md text-xs uppercase tracking-widest text-primary">✦ Contacto &amp; Ubicación ✦</span>
+        </div>
+        <h1 class="font-headline-lg text-4xl lg:text-5xl text-on-surface font-bold tracking-tight">
+          Información, Cobertura &amp; <span class="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">Gestión de Citas</span>
+        </h1>
+        <p class="font-body-lg text-base sm:text-lg text-on-surface-variant max-w-2xl">
+          Atención personalizada por nuestras 3 artistas residentes. Consulta nuestra modalidad itinerante, horarios semanales o gestiona tu reserva con tu código único.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Modalidad Itinerante & Cobertura -->
+        <div class="lg:col-span-5 flex flex-col space-y-6">
+          <div class="w-full rounded-3xl bg-[#13121e] shadow-md relative overflow-hidden p-6 lg:p-8 border border-black/5 dark:border-[#2a263d] space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-full bg-[#b388ff]/20 flex items-center justify-center text-[#d4bbff]">
+                  <span class="material-symbols-outlined text-2xl">home_pin</span>
+                </div>
+                <div>
+                  <span class="font-label-md text-sm text-neutral-900 dark:text-white block font-semibold">Modalidad Itinerante Ro Studio</span>
+                  <span class="font-body-sm text-[#ccc3d4] text-xs">Sin local comercial abierto al público</span>
+                </div>
+              </div>
+              <span class="bg-neutral-100 dark:bg-[#1f1d2c] border border-[#2e2a42] px-3 py-1 rounded-full text-xs font-label-sm text-[#d4bbff]">A tu medida</span>
+            </div>
+
+            <div class="space-y-4 pt-2">
+              <div class="p-4 rounded-2xl bg-neutral-50 dark:bg-[#191726] border border-black/5 dark:border-[#28253b] space-y-1.5">
+                <div class="flex items-center space-x-2 text-[#f6adff]">
+                  <span class="material-symbols-outlined text-base">room_service</span>
+                  <span class="font-label-md text-xs font-semibold uppercase tracking-wider">Opción 1: A tu Domicilio</span>
+                </div>
+                <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] text-xs leading-relaxed">
+                  La especialista traslada su maletín técnico completo, aparatología portátil y cosmética premium directo a tu hogar u hotel con puntualidad rigurosa.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-neutral-50 dark:bg-[#191726] border border-black/5 dark:border-[#28253b] space-y-1.5">
+                <div class="flex items-center space-x-2 text-[#d4bbff]">
+                  <span class="material-symbols-outlined text-base">apartment</span>
+                  <span class="font-label-md text-xs font-semibold uppercase tracking-wider">Opción 2: Atelier / Estudio Privado</span>
+                </div>
+                <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] text-xs leading-relaxed">
+                  Si prefieres salir de casa, puedes ser recibida en el estudio residencial íntimo de cada artista (dirección exacta confirmada en tu código de reserva).
+                </p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#a402c4]/10 border border-[#6a1b9a]/40 flex items-center space-x-3">
+              <span class="material-symbols-outlined text-[#f6adff] text-xl shrink-0">explore</span>
+              <span class="font-body-sm text-xs text-[#e4e1e9]">Área de cobertura: Toda la zona metropolitana y alrededores (sin recargo en radio céntrico).</span>
+            </div>
+          </div>
+
+          <!-- Canales directos de contacto -->
+          <div class="bg-white dark:bg-[#13121e] p-6 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="font-label-sm text-xs text-[#7c572c] dark:text-[#d4bbff] uppercase font-bold tracking-wider">Contacto &amp; Coordinación</span>
+              <span class="font-body-sm text-neutral-500 dark:text-[#a09baa] text-xs">Respuesta en &lt; 15 min</span>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-neutral-100 dark:bg-[#201d30] flex items-center justify-center text-[#6c1c2e] dark:text-[#d4bbff]">
+                  <span class="material-symbols-outlined text-lg">call</span>
+                </div>
+                <div>
+                  <span class="font-title-md text-base text-neutral-900 dark:text-white block font-semibold">+34 934 81 22 90</span>
+                  <span class="font-body-sm text-neutral-500 dark:text-[#a09baa] text-xs">Coordinación directa de visitas</span>
+                </div>
+              </div>
+              <a class="bg-[#fdcb97] dark:bg-[#2e1240] text-[#78542a] dark:text-[#f6adff] border border-black/5 dark:border-[#6a1b9a]/50 font-label-md px-4 py-2 rounded-full hover:bg-[#eebe8a] dark:hover:bg-[#46128d] transition-colors text-xs flex items-center space-x-1.5" href="https://wa.me/" rel="noopener" target="_blank">
+                <span class="material-symbols-outlined text-sm">chat</span>
+                <span>WhatsApp Directo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Horarios y Gestión de Cita -->
+        <div class="lg:col-span-7 flex flex-col space-y-6">
+          <!-- Horarios Semanales -->
+          <div class="bg-white dark:bg-[#13121e] p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <span class="material-symbols-outlined text-[#6c1c2e] dark:text-[#d4bbff] text-2xl">schedule</span>
+                <h3 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Horarios Semanales de Atención</h3>
+              </div>
+              <span class="bg-neutral-100 dark:bg-[#1f1d2c] border border-black/5 dark:border-[#2e2a42] px-3 py-1 rounded-full text-xs font-label-sm text-neutral-600 dark:text-[#ccc3d4]">Zona CET / Santiago</span>
+            </div>
+            <div class="space-y-3 font-body-sm text-xs sm:text-sm">
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-50 dark:bg-[#191726]">
+                <span class="font-medium text-neutral-900 dark:text-white">Lunes a Jueves</span>
+                <span class="text-neutral-600 dark:text-[#ccc3d4] font-mono">09:00 – 19:00 hrs</span>
+              </div>
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-50 dark:bg-[#191726]">
+                <span class="font-medium text-neutral-900 dark:text-white">Viernes (Horario extendido)</span>
+                <span class="font-mono font-semibold text-[#6c1c2e] dark:text-[#d4bbff]">09:00 – 20:00 hrs</span>
+              </div>
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-50 dark:bg-[#191726]">
+                <span class="font-medium text-neutral-900 dark:text-white">Sábado</span>
+                <span class="text-neutral-600 dark:text-[#ccc3d4] font-mono">10:00 – 18:00 hrs</span>
+              </div>
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-100 dark:bg-[#1f1d2d]">
+                <span class="font-medium text-neutral-500 dark:text-[#a09baa]">Domingo</span>
+                <span class="text-red-600 dark:text-[#ffb4ab] font-medium">Cerrado (Solo sesiones nupciales exclusivas)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Módulo Interactivo: Buscar Cita con Código Único -->
+          <div class="bg-white dark:bg-[#13121e] p-6 lg:p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm space-y-4">
+            <div class="flex items-center space-x-3">
+              <span class="material-symbols-outlined text-[#a402c4] dark:text-[#d4bbff] text-2xl">key</span>
+              <div>
+                <h4 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Gestionar o Consultar Cita</h4>
+                <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] text-xs sm:text-sm">
+                  Ingresa tu código alfanumérico (ej: RO-8942) para revisar el estado o coordinar con la especialista.
+                </p>
+              </div>
+            </div>
+            
+            <form action="{% url 'contacto' %}" method="get" class="pt-2 flex flex-col sm:flex-row gap-3">
+              <input class="flex-1 bg-neutral-50 dark:bg-[#191726] border border-black/10 dark:border-[#2e2a42] px-4 py-3 rounded-full text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-[#958e9d] font-label-md outline-none focus:ring-2 focus:ring-[#b388ff] transition-all text-xs sm:text-sm" placeholder="Ej: RO-8942" required type="text" name="codigo_buscar" value="{{ codigo_buscar }}">
+              <button class="bg-gradient-to-r from-[#6c1c2e] to-[#8a3344] dark:from-[#b388ff] dark:to-[#d4bbff] text-white dark:text-[#260058] px-6 py-3 rounded-full font-label-md text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition-opacity shrink-0" type="submit">
+                Buscar mi Cita
+              </button>
+            </form>
+
+            {% if error_busqueda %}
+            <div class="p-3.5 rounded-xl bg-red-950/50 border border-red-500/30 text-xs text-red-300 flex items-center space-x-2">
+              <span class="material-symbols-outlined text-red-400 text-base">error</span>
+              <span>{{ error_busqueda }}</span>
+            </div>
+            {% endif %}
+
+            {% if resultado_busqueda %}
+            <div class="p-5 rounded-2xl bg-surface-container-lowest border border-primary/40 space-y-3 mt-4 text-xs">
+              <div class="flex items-center justify-between pb-2 border-b border-white/5">
+                <span class="font-label-md text-secondary font-bold uppercase">Cita Localizada: {{ resultado_busqueda.codigo }}</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-primary/20 text-primary font-bold">{{ resultado_busqueda.estado|title }}</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-on-surface-variant">
+                <div><span class="text-outline">Cliente:</span> <strong class="text-on-surface">{{ resultado_busqueda.nombre_completo }}</strong></div>
+                <div><span class="text-outline">Servicio:</span> <strong class="text-on-surface">{{ resultado_busqueda.servicio.nombre }}</strong></div>
+                <div><span class="text-outline">Fecha:</span> <strong class="text-primary">{{ resultado_busqueda.fecha|date:"d/m/Y" }}</strong></div>
+                <div><span class="text-outline">Hora:</span> <strong class="text-primary">{{ resultado_busqueda.hora }} hrs</strong></div>
+              </div>
+              <div class="pt-2 text-on-surface-variant text-[11px]">
+                <p>Para reprogramar o cancelar, responde a tu confirmación de WhatsApp o contacta directamente a la especialista asignada con al menos 2 horas de anticipación.</p>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

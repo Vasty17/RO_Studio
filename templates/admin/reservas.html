@@ -1,0 +1,87 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Gestión de Reservas — Administración Ro Studio{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-white">Listado de Reservas</h1>
+      <p class="text-xs text-neutral-400">Control de estados, verificación de clientes y cancelaciones.</p>
+    </div>
+  </div>
+
+  <div class="bg-[#13131c] border border-white/10 rounded-2xl p-6">
+    {% if reservas %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="text-neutral-400 border-b border-white/5 pb-2">
+            <th class="py-2.5">Cód.</th>
+            <th class="py-2.5">Cliente</th>
+            <th class="py-2.5">Servicio</th>
+            <th class="py-2.5">Fecha / Hora</th>
+            <th class="py-2.5">Modalidad &amp; Dirección</th>
+            <th class="py-2.5">Contacto</th>
+            <th class="py-2.5">Estado</th>
+            <th class="py-2.5 text-right">Acción</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          {% for r in reservas %}
+          <tr class="hover:bg-white/5 transition-colors">
+            <td class="py-3 font-mono font-bold text-primary">{{ r.codigo }}</td>
+            <td class="py-3 font-semibold text-white">
+              {{ r.nombre_completo }}
+              {% if r.comentario %}
+              <span class="block text-[11px] text-neutral-400 italic font-normal max-w-xs truncate" title="{{ r.comentario }}">"{{ r.comentario }}"</span>
+              {% endif %}
+            </td>
+            <td class="py-3 text-neutral-300">
+              {{ r.servicio.nombre }}
+              <span class="block text-[10px] text-neutral-500">{{ r.servicio.precio_formateado }}</span>
+            </td>
+            <td class="py-3 text-secondary font-medium">
+              {{ r.fecha|date:"d/m/Y" }}<br>{{ r.hora }} hrs
+            </td>
+            <td class="py-3 text-neutral-300 max-w-xs">
+              <span class="font-semibold block capitalize">{{ r.get_modalidad_display }}</span>
+              {% if r.direccion %}
+              <span class="text-[11px] text-neutral-400 block truncate" title="{{ r.direccion }}">{{ r.direccion }}</span>
+              {% endif %}
+            </td>
+            <td class="py-3 font-mono text-neutral-300">
+              {{ r.telefono }}<br>
+              <span class="text-neutral-500 text-[11px]">{{ r.email }}</span>
+            </td>
+            <td class="py-3">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold {% if r.estado == 'confirmada' %}bg-emerald-950 text-emerald-400 border border-emerald-800{% elif r.estado == 'cancelada' %}bg-red-950 text-red-400 border border-red-800{% else %}bg-amber-950 text-amber-400 border border-amber-800{% endif %}">
+                {{ r.get_estado_display }}
+              </span>
+            </td>
+            <td class="py-3 text-right">
+              <form method="post" action="{% url 'admin_reservas' %}" class="inline-flex gap-1">
+                {% csrf_token %}
+                <input type="hidden" name="reserva_id" value="{{ r.id }}">
+                {% if r.estado != 'cancelada' %}
+                <button type="submit" name="nuevo_estado" value="cancelada" class="px-2 py-1 bg-red-950/60 hover:bg-red-900 border border-red-800 text-red-300 rounded text-[11px]">
+                  Cancelar
+                </button>
+                {% else %}
+                <button type="submit" name="nuevo_estado" value="confirmada" class="px-2 py-1 bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 rounded text-[11px]">
+                  Restaurar
+                </button>
+                {% endif %}
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-neutral-500 text-xs py-8 text-center">No hay reservas registradas.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,554 @@
+{% extends 'base.html' %}
+
+{% block title %}Ro Studio — Reservar Experiencia | Cita Privada{% endblock %}
+
+{% block content %}
+<div class="flex flex-col w-full relative">
+  <!-- Cosmic Ambient Glow Canvas Decor -->
+  <div class="relative w-full overflow-hidden">
+    <div class="absolute -top-32 right-1/4 w-[32rem] h-[32rem] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-96 -left-20 w-96 h-96 bg-secondary/10 rounded-full blur-[130px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-primary-container/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="w-full px-4 sm:px-8 lg:px-12 py-8 lg:py-12 relative z-10 max-w-[1400px] mx-auto">
+      
+      <!-- Top Title & Cosmic Header Anchor -->
+      <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-outline-variant/40">
+        <div>
+          <div class="flex items-center space-x-2 text-secondary font-label-md text-xs uppercase tracking-[0.2em] mb-2 font-semibold">
+            <span class="material-symbols-outlined text-sm">auto_awesome</span>
+            <span>Guest Checkout • Sanctuaire Cósmico</span>
+          </div>
+          <h1 class="font-headline-lg text-3xl sm:text-4xl text-on-surface tracking-tight font-bold flex items-center gap-3">
+            Reservar Experiencia <span class="text-primary text-2xl hidden sm:inline">✦</span>
+          </h1>
+          <p class="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl mt-1">
+            Agenda directa sin registro. Selecciona tu momento de calma y confirmaremos tu cita en tiempo real.
+          </p>
+        </div>
+        <!-- Live Sync Shield Badge -->
+        <div class="flex items-center space-x-3 bg-surface-container-low border border-outline-variant/80 px-4 py-2.5 rounded-full self-start md:self-auto shadow-sm backdrop-blur">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary shadow-[0_0_8px_#f6adff]"></span>
+          </span>
+          <span class="font-label-sm text-xs text-on-surface-variant font-medium">Equipo de 3 especialistas • Cobertura a Domicilio y Estudio Privado</span>
+        </div>
+      </div>
+
+      <!-- Alerta de Error si ocurre colisión de reserva en la base de datos -->
+      {% if error_mensaje %}
+      <div class="mb-8 p-4 rounded-2xl bg-red-950/70 border border-red-500/50 text-red-200 flex items-start space-x-3.5 shadow-xl animate-bounce">
+        <span class="material-symbols-outlined text-red-400 text-2xl shrink-0">error</span>
+        <div>
+          <h4 class="font-bold text-sm font-headline-sm">Atención al reservar</h4>
+          <p class="text-sm mt-0.5 leading-relaxed">{{ error_mensaje }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- 5-Stage Visual Stepper -->
+      <div class="mb-12 bg-surface-container-low/80 glass-card p-5 lg:p-6 rounded-2xl border border-outline-variant/50 shadow-lg">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 lg:gap-4 relative">
+          <!-- Step 1 (Completed) -->
+          <div class="flex items-center space-x-3 p-3 rounded-xl bg-surface-container/60 border border-outline-variant/40 transition-all">
+            <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/50 text-primary flex items-center justify-center font-label-md text-xs font-semibold shrink-0">
+              <span class="material-symbols-outlined text-base">check</span>
+            </div>
+            <div class="min-w-0">
+              <p class="font-label-sm text-[11px] text-secondary uppercase tracking-wider font-semibold">Paso 1</p>
+              <p class="font-title-md text-xs text-on-surface font-medium truncate">{{ servicio_seleccionado.nombre|default:"Servicio" }}</p>
+            </div>
+          </div>
+          <!-- Step 2 (Completed) -->
+          <div class="flex items-center space-x-3 p-3 rounded-xl bg-surface-container/60 border border-outline-variant/40 transition-all">
+            <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/50 text-primary flex items-center justify-center font-label-md text-xs font-semibold shrink-0">
+              <span class="material-symbols-outlined text-base">check</span>
+            </div>
+            <div class="min-w-0">
+              <p class="font-label-sm text-[11px] text-secondary uppercase tracking-wider font-semibold">Paso 2</p>
+              <p class="font-title-md text-xs text-on-surface font-medium truncate" id="stepper-fecha-label">{{ fecha_seleccionada|date:"d M Y" }}</p>
+            </div>
+          </div>
+          <!-- Step 3 (Active) -->
+          <div class="flex items-center space-x-3 p-3 rounded-xl bg-primary/15 border border-primary/60 shadow-[0_0_15px_rgba(212,187,255,0.15)] transition-all">
+            <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-xs font-bold shrink-0 shadow-md">
+              3
+            </div>
+            <div class="min-w-0">
+              <p class="font-label-sm text-[11px] text-primary font-bold uppercase tracking-wider">Paso 3 • Activo</p>
+              <p class="font-title-md text-xs text-on-surface font-semibold truncate" id="stepper-hora-label">{{ hora_seleccionada }} hrs</p>
+            </div>
+          </div>
+          <!-- Step 4 (Current Form) -->
+          <div class="flex items-center space-x-3 p-3 rounded-xl bg-surface-container-lowest/50 border border-outline-variant/30 transition-all">
+            <div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-md text-xs font-semibold shrink-0">
+              4
+            </div>
+            <div class="min-w-0">
+              <p class="font-label-sm text-[11px] text-outline uppercase tracking-wider">Paso 4</p>
+              <p class="font-title-md text-xs text-on-surface-variant font-medium truncate">Tus Datos</p>
+            </div>
+          </div>
+          <!-- Step 5 (Final) -->
+          <div class="col-span-2 md:col-span-1 flex items-center space-x-3 p-3 rounded-xl bg-surface-container-lowest/50 border border-outline-variant/30 transition-all">
+            <div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-md text-xs font-semibold shrink-0">
+              5
+            </div>
+            <div class="min-w-0">
+              <p class="font-label-sm text-[11px] text-outline uppercase tracking-wider">Paso 5</p>
+              <p class="font-title-md text-xs text-on-surface-variant font-medium truncate">Confirmación</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULARIO PRINCIPAL DE RESERVA -->
+      <form action="{% url 'reserva' %}" method="post" id="reserva-django-form">
+        {% csrf_token %}
+        <input type="hidden" name="servicio_id" id="input_servicio_id" value="{{ servicio_seleccionado.id }}">
+        <input type="hidden" name="fecha" id="input_fecha" value="{{ fecha_seleccionada_str }}">
+        <input type="hidden" name="hora" id="input_hora" value="{{ hora_seleccionada }}">
+
+        <!-- Main Dual Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- LEFT COLUMN: Dynamic Interactive Booking Engine (Cols: 7) -->
+          <div class="lg:col-span-7 space-y-8">
+            
+            <!-- Section 1: Pre-selected Service Summary & Switcher -->
+            <div class="bg-surface-container-low/90 glass-card p-6 rounded-2xl border border-outline-variant/60 shadow-lg">
+              <div class="flex items-center justify-between pb-4">
+                <div class="flex items-center space-x-3">
+                  <span class="w-7 h-7 rounded-full bg-primary/20 border border-primary/50 text-primary font-label-sm text-xs flex items-center justify-center font-bold">1</span>
+                  <span class="font-headline-sm text-lg text-on-surface font-semibold">Servicio Seleccionado</span>
+                </div>
+                <!-- Dropdown selector de servicio -->
+                <div class="relative">
+                  <select onchange="cambiarServicio(this.value)" class="text-xs bg-surface-container border border-outline-variant text-secondary rounded-full px-3 py-1.5 outline-none cursor-pointer focus:border-primary">
+                    {% for s in servicios %}
+                    <option value="{{ s.id }}" {% if s.id == servicio_seleccionado.id %}selected{% endif %}>
+                      {{ s.nombre }} ({{ s.precio_formateado }})
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              {% if servicio_seleccionado %}
+              <div class="p-4 rounded-xl bg-surface-container-lowest/70 border border-outline-variant/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-start sm:items-center space-x-4">
+                  <div class="w-16 h-16 rounded-xl bg-surface-container-high overflow-hidden shrink-0 flex items-center justify-center ring-1 ring-primary/30 shadow-inner">
+                    <img class="w-full h-full object-cover" alt="{{ servicio_seleccionado.nombre }}" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGC949AL4HlFhrM8xHMz8b3sH0uDMo0Fl_9rVCiy7EyQ6vFWDqL8Rtk2nCHfmMRTEFskAenE5dmoKhXBPrbA9LGJrV6_ryuRbAwkHELdp2hq8hESGANMhTAM4tGnDBM3QYj3Fz0JNz_ftoMC4DHSOjV61D5_OXFdHxw-xjQRZAB5EGgwBpzJKkDTm-dnKu2EYI1Qm3oxBhmvsSoILmgFhJdc31179cXSjLzPLNBlA">
+                  </div>
+                  <div>
+                    <div class="flex items-center space-x-2">
+                      <span class="bg-secondary-container/40 border border-secondary/40 text-secondary font-label-sm text-[11px] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold">
+                        {{ servicio_seleccionado.categoria.emoji }} {{ servicio_seleccionado.categoria.nombre }}
+                      </span>
+                      <span class="text-on-surface-variant font-label-sm text-xs flex items-center gap-0.5">
+                        <span class="material-symbols-outlined text-xs text-primary">schedule</span> {{ servicio_seleccionado.duracion_texto }}
+                      </span>
+                    </div>
+                    <h2 class="font-headline-sm text-base text-on-surface mt-1 font-semibold">{{ servicio_seleccionado.nombre }}</h2>
+                    <p class="font-body-sm text-xs text-on-surface-variant">{{ servicio_seleccionado.descripcion }}</p>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right shrink-0">
+                  <span class="font-label-sm text-[11px] text-outline block uppercase tracking-wider">Tarifa fija</span>
+                  <span class="font-headline-sm text-xl text-primary font-bold">{{ servicio_seleccionado.precio_formateado }}</span>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+
+            <!-- Section 2: Date Selector Calendar -->
+            <div class="bg-surface-container-low/90 glass-card p-6 rounded-2xl border border-outline-variant/60 shadow-lg">
+              <div class="flex items-center justify-between pb-6">
+                <div class="flex items-center space-x-3">
+                  <span class="w-7 h-7 rounded-full bg-primary/20 border border-primary/50 text-primary font-label-sm text-xs flex items-center justify-center font-bold">2</span>
+                  <span class="font-headline-sm text-lg text-on-surface font-semibold">Fecha de Atención</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <input type="date" id="datePickerInput" value="{{ fecha_seleccionada_str }}" onchange="seleccionarFecha(this.value)" class="bg-surface-container border border-outline-variant px-3 py-1.5 rounded-full text-xs text-on-surface outline-none focus:border-primary">
+                </div>
+              </div>
+
+              <!-- Selector rápido de días próximos -->
+              <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                <button type="button" onclick="seleccionarDiaOffset(1)" class="day-select-btn p-3 rounded-xl border border-outline-variant/40 bg-surface-container text-center hover:border-primary transition-all">
+                  <span class="block text-[10px] uppercase font-bold text-secondary">Mañana</span>
+                  <span class="block text-sm font-semibold text-on-surface">Día 1</span>
+                </button>
+                <button type="button" onclick="seleccionarDiaOffset(2)" class="day-select-btn p-3 rounded-xl border border-outline-variant/40 bg-surface-container text-center hover:border-primary transition-all">
+                  <span class="block text-[10px] uppercase font-bold text-secondary">+2 Días</span>
+                  <span class="block text-sm font-semibold text-on-surface">Día 2</span>
+                </button>
+                <button type="button" onclick="seleccionarDiaOffset(3)" class="day-select-btn p-3 rounded-xl border border-outline-variant/40 bg-surface-container text-center hover:border-primary transition-all">
+                  <span class="block text-[10px] uppercase font-bold text-secondary">+3 Días</span>
+                  <span class="block text-sm font-semibold text-on-surface">Día 3</span>
+                </button>
+                <button type="button" onclick="seleccionarDiaOffset(4)" class="day-select-btn p-3 rounded-xl border border-outline-variant/40 bg-surface-container text-center hover:border-primary transition-all">
+                  <span class="block text-[10px] uppercase font-bold text-secondary">+4 Días</span>
+                  <span class="block text-sm font-semibold text-on-surface">Día 4</span>
+                </button>
+                <button type="button" onclick="seleccionarDiaOffset(5)" class="day-select-btn p-3 rounded-xl border border-outline-variant/40 bg-surface-container text-center hover:border-primary transition-all">
+                  <span class="block text-[10px] uppercase font-bold text-secondary">+5 Días</span>
+                  <span class="block text-sm font-semibold text-on-surface">Día 5</span>
+                </button>
+                <button type="button" onclick="seleccionarDiaOffset(6)" class="day-select-btn p-3 rounded-xl border border-outline-variant/40 bg-surface-container text-center hover:border-primary transition-all">
+                  <span class="block text-[10px] uppercase font-bold text-secondary">+6 Días</span>
+                  <span class="block text-sm font-semibold text-on-surface">Día 6</span>
+                </button>
+              </div>
+
+              <div class="mt-4 pt-4 flex flex-wrap items-center justify-between gap-3 text-on-surface-variant font-label-sm text-xs border-t border-outline-variant/40">
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary inline-block shadow-[0_0_8px_#d4bbff]"></span><span>Seleccionado</span></span>
+                  <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-surface-container-high border border-outline-variant inline-block"></span><span>Disponible</span></span>
+                </div>
+                <span class="text-secondary font-medium" id="fecha-label-badge">Fecha: {{ fecha_seleccionada|date:"d M Y" }}</span>
+              </div>
+            </div>
+
+            <!-- Section 3: Available Time Slot Chips (Con datos reales de Django / PostgreSQL) -->
+            <div class="bg-surface-container-low/90 glass-card p-6 rounded-2xl border border-outline-variant/60 shadow-lg">
+              <div class="flex items-center justify-between pb-4">
+                <div class="flex items-center space-x-3">
+                  <span class="w-7 h-7 rounded-full bg-primary/20 border border-primary/50 text-primary font-label-sm text-xs flex items-center justify-center font-bold">3</span>
+                  <span class="font-headline-sm text-lg text-on-surface font-semibold">Horarios Disponibles</span>
+                </div>
+                <span class="font-label-sm text-xs text-on-surface-variant bg-surface-container border border-outline-variant/50 px-3 py-1 rounded-full">Santiago (GMT-3)</span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2" id="slots-container">
+                {% for bloque in bloques_horarios %}
+                  {% if bloque.ocupado %}
+                  <!-- Bloque Ocupado (No disponible para selección) -->
+                  <div class="p-3.5 rounded-xl bg-surface-container-high/30 border border-outline-variant/30 text-outline cursor-not-allowed text-left flex flex-col opacity-50" title="Horario no disponible en el sistema">
+                    <span class="font-headline-sm text-lg text-outline">{{ bloque.hora }}</span>
+                    <span class="font-label-sm text-xs text-outline flex items-center gap-1 mt-0.5">
+                      <span class="material-symbols-outlined text-xs">block</span> Ocupado
+                    </span>
+                  </div>
+                  {% else %}
+                  <!-- Bloque Disponible -->
+                  <button type="button" onclick="seleccionarHora('{{ bloque.hora }}')" class="time-slot-btn p-3.5 rounded-xl {% if bloque.seleccionado %}bg-gradient-to-br from-primary/30 to-primary-container/20 text-on-surface border-2 border-primary shadow-[0_0_20px_rgba(212,187,255,0.25)]{% else %}bg-surface-container-lowest/80 border border-outline-variant/60 text-on-surface hover:border-primary/70 hover:bg-primary/5{% endif %} transition-all text-left flex flex-col cursor-pointer group" data-hora="{{ bloque.hora }}">
+                    <div class="flex items-center justify-between w-full">
+                      <span class="font-headline-sm text-lg font-bold {% if bloque.seleccionado %}text-primary{% else %}text-on-surface group-hover:text-primary{% endif %}">{{ bloque.hora }}</span>
+                      {% if bloque.seleccionado %}
+                      <span class="material-symbols-outlined text-xs bg-primary text-on-primary rounded-full p-0.5">check</span>
+                      {% endif %}
+                    </div>
+                    <span class="font-label-sm text-xs text-secondary font-medium mt-0.5 flex items-center gap-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_6px_#f6adff]"></span>
+                      {% if bloque.seleccionado %}Tu selección{% else %}Libre{% endif %}
+                    </span>
+                  </button>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <!-- Anti-duplicate lock notice -->
+              <div class="mt-5 p-3 rounded-xl bg-surface-container-lowest/70 border border-outline-variant/40 flex items-center space-x-2.5 text-on-surface-variant font-label-sm text-xs">
+                <span class="material-symbols-outlined text-base text-secondary animate-spin">sync</span>
+                <span>Protección atómica activa: la base de datos PostgreSQL bloquea citas duplicadas simultáneas.</span>
+              </div>
+            </div>
+
+            <!-- Section 4: Guest Details Form (Sin registro ni contraseña) -->
+            <div class="bg-surface-container-low/90 glass-card p-6 rounded-2xl border border-outline-variant/60 shadow-lg">
+              <div class="flex items-center space-x-3 pb-6">
+                <span class="w-7 h-7 rounded-full bg-primary/20 border border-primary/50 text-primary font-label-sm text-xs flex items-center justify-center font-bold">4</span>
+                <div>
+                  <span class="font-headline-sm text-lg text-on-surface font-semibold">Datos del Cliente Invitado</span>
+                  <p class="font-body-sm text-xs text-on-surface-variant">Sin contraseñas. Usamos estos datos únicamente para enviarte tu código de cita.</p>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <!-- Selector de Modalidad de Atención -->
+                <div class="space-y-2 pb-2">
+                  <label class="font-label-md text-xs text-on-surface font-semibold block">Modalidad de Ubicación <span class="text-primary">*</span></label>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-start p-3.5 rounded-xl bg-surface-container-lowest border-2 border-primary cursor-pointer transition-all space-x-3">
+                      <input checked class="mt-1 h-4 w-4 rounded accent-primary bg-surface-container text-primary focus:ring-primary" name="modalidad" type="radio" value="domicilio">
+                      <div class="min-w-0">
+                        <span class="font-title-md text-xs text-on-surface font-semibold block flex items-center gap-1.5">
+                          <span class="material-symbols-outlined text-base text-primary">home_pin</span> A mi domicilio
+                        </span>
+                        <span class="font-body-sm text-[12px] text-on-surface-variant block mt-0.5">Atención en la comodidad de tu hogar o lugar coordinado.</span>
+                      </div>
+                    </label>
+                    <label class="flex items-start p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/60 hover:border-primary/50 cursor-pointer transition-all space-x-3">
+                      <input class="mt-1 h-4 w-4 rounded accent-primary bg-surface-container text-primary focus:ring-primary" name="modalidad" type="radio" value="estudio_privado">
+                      <div class="min-w-0">
+                        <span class="font-title-md text-xs text-on-surface font-semibold block flex items-center gap-1.5">
+                          <span class="material-symbols-outlined text-base text-secondary">storefront</span> Estudio privado de la especialista
+                        </span>
+                        <span class="font-body-sm text-[12px] text-on-surface-variant block mt-0.5">Ubicación privada coordinada tras la confirmación.</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Campo de Dirección y Comuna -->
+                <div class="space-y-1.5">
+                  <label class="font-label-md text-xs text-on-surface font-semibold flex items-center justify-between" for="client-address">
+                    <span>Dirección &amp; Comuna (para atención a domicilio) <span class="text-primary">*</span></span>
+                    <span class="text-secondary font-label-sm text-[11px]">Equipo de 3 especialistas</span>
+                  </label>
+                  <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3.5 top-3 text-outline text-lg pointer-events-none">location_on</span>
+                    <input class="w-full bg-surface-container-lowest border border-outline-variant/60 pl-11 pr-4 py-2.5 rounded-xl text-xs font-body-md text-on-surface outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="client-address" name="direccion" placeholder="Ej: Av. Vitacura 4120, Depto 8B, Vitacura" type="text" value="Av. Vitacura 4120, Depto 8B, Vitacura" required>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- Nombre -->
+                  <div class="space-y-1.5">
+                    <label class="font-label-md text-xs text-on-surface font-semibold block" for="client-name">Nombre <span class="text-primary">*</span></label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3.5 top-3 text-outline text-lg pointer-events-none">person</span>
+                      <input class="w-full bg-surface-container-lowest border border-outline-variant/60 pl-11 pr-4 py-2.5 rounded-xl text-xs font-body-md text-on-surface outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="client-name" name="nombre" placeholder="Ej: Valentina" required type="text" value="Valentina">
+                    </div>
+                  </div>
+                  <!-- Apellido -->
+                  <div class="space-y-1.5">
+                    <label class="font-label-md text-xs text-on-surface font-semibold block" for="client-lastname">Apellido <span class="text-primary">*</span></label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3.5 top-3 text-outline text-lg pointer-events-none">badge</span>
+                      <input class="w-full bg-surface-container-lowest border border-outline-variant/60 pl-11 pr-4 py-2.5 rounded-xl text-xs font-body-md text-on-surface outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="client-lastname" name="apellido" placeholder="Ej: Errázuriz" required type="text" value="Errázuriz">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- Teléfono Móvil -->
+                  <div class="space-y-1.5">
+                    <label class="font-label-md text-xs text-on-surface font-semibold block" for="client-phone">Teléfono Móvil (WhatsApp) <span class="text-primary">*</span></label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3.5 top-3 text-outline text-lg pointer-events-none">call</span>
+                      <input class="w-full bg-surface-container-lowest border border-outline-variant/60 pl-11 pr-4 py-2.5 rounded-xl text-xs font-body-md text-on-surface outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="client-phone" name="telefono" placeholder="+56 9 8452 1190" required type="tel" value="+56 9 8452 1190">
+                    </div>
+                  </div>
+                  <!-- Correo Electrónico -->
+                  <div class="space-y-1.5">
+                    <label class="font-label-md text-xs text-on-surface font-semibold block" for="client-email">Correo Electrónico <span class="text-primary">*</span></label>
+                    <div class="relative">
+                      <span class="material-symbols-outlined absolute left-3.5 top-3 text-outline text-lg pointer-events-none">alternate_email</span>
+                      <input class="w-full bg-surface-container-lowest border border-outline-variant/60 pl-11 pr-4 py-2.5 rounded-xl text-xs font-body-md text-on-surface outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="client-email" name="email" placeholder="valentina.errazuriz@gmail.com" required type="email" value="valentina.errazuriz@gmail.com">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Indicaciones Especiales / Comentarios -->
+                <div class="space-y-1.5 pt-1">
+                  <label class="font-label-md text-xs text-on-surface font-semibold flex items-center justify-between" for="client-notes">
+                    <span>Indicaciones, comuna o referencias de acceso</span>
+                    <span class="text-outline font-normal font-label-sm text-[11px]">Opcional</span>
+                  </label>
+                  <textarea class="w-full bg-surface-container-lowest border border-outline-variant/60 p-3.5 rounded-xl text-xs font-body-md text-on-surface outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none" id="client-notes" name="comentario" placeholder="Ej: Timbre departamento, indicaciones de conserjería o preferencia por estudio privado..." rows="3"></textarea>
+                </div>
+
+                <!-- Checkbox consentimiento -->
+                <div class="flex items-start space-x-3 pt-2">
+                  <input checked class="mt-1 h-4 w-4 rounded accent-primary bg-surface-container border-outline-variant text-primary focus:ring-primary cursor-pointer" id="terms-consent" type="checkbox" required>
+                  <label class="font-body-sm text-xs text-on-surface-variant cursor-pointer" for="terms-consent">
+                    Acepto recibir confirmación y coordinación de dirección vía WhatsApp; política de cancelación flexible hasta 2 horas antes de la cita.
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Trust & Studio Protocols -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-4 rounded-xl bg-surface-container-low/70 border border-outline-variant/40 flex items-start space-x-3">
+                <span class="material-symbols-outlined text-primary text-xl shrink-0">clean_hands</span>
+                <div>
+                  <p class="font-title-md text-xs text-on-surface font-semibold">Autoclave Médico</p>
+                  <p class="font-body-sm text-[11px] text-on-surface-variant">Esterilización hospitalaria en cada instrumental.</p>
+                </div>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low/70 border border-outline-variant/40 flex items-start space-x-3">
+                <span class="material-symbols-outlined text-primary text-xl shrink-0">credit_card_off</span>
+                <div>
+                  <p class="font-title-md text-xs text-on-surface font-semibold">Pago Presencial</p>
+                  <p class="font-body-sm text-[11px] text-on-surface-variant">Pagas al finalizar tu sesión en el estudio.</p>
+                </div>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low/70 border border-outline-variant/40 flex items-start space-x-3">
+                <span class="material-symbols-outlined text-primary text-xl shrink-0">lock_reset</span>
+                <div>
+                  <p class="font-title-md text-xs text-on-surface font-semibold">Código Directo</p>
+                  <p class="font-body-sm text-[11px] text-on-surface-variant">Cancela o reprograma con un clic desde tu e-mail.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Sticky Dynamic 'Tu Cita' Summary Panel (Cols: 5) -->
+          <div class="lg:col-span-5 sticky top-24 space-y-6">
+            <div class="bg-surface-container-low/90 glass-card rounded-2xl p-6 lg:p-7 border border-outline-variant/60 shadow-xl relative overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary-container"></div>
+              <div class="flex items-center justify-between pb-5">
+                <div class="flex items-center space-x-2">
+                  <span class="font-headline-sm text-lg text-on-surface font-bold">Tu Cita</span>
+                  <span class="text-xs uppercase bg-secondary-container/40 border border-secondary/50 text-secondary px-2.5 py-0.5 rounded-full font-bold">Resumen</span>
+                </div>
+                <span class="material-symbols-outlined text-primary text-xl">event_available</span>
+              </div>
+
+              <!-- Location & Details Anchor -->
+              <div class="pb-5 space-y-3">
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-base">home_repair_service</span>
+                  </div>
+                  <div>
+                    <p class="font-title-md text-xs text-on-surface font-semibold">Modalidad: A Domicilio o Estudio Privado</p>
+                    <p class="font-body-sm text-[11px] text-on-surface-variant">Atención por el Equipo de 3 Especialistas</p>
+                    <span class="font-label-sm text-[11px] text-secondary font-medium">Dirección en tu domicilio o estudio privado coordinado tras la reserva</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Line Items Breakdown -->
+              <div class="py-4 space-y-3 bg-surface-container-lowest/80 border border-outline-variant/40 rounded-xl p-4">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <span class="font-label-sm text-[11px] text-secondary uppercase font-bold tracking-wider">Categoría</span>
+                    <p class="font-body-md text-xs text-on-surface flex items-center gap-1.5 mt-0.5 font-medium">
+                      <span>{{ servicio_seleccionado.categoria.emoji }} {{ servicio_seleccionado.categoria.nombre }}</span>
+                    </p>
+                  </div>
+                  <span class="font-label-sm text-xs bg-surface-container border border-outline-variant/40 px-2 py-0.5 rounded text-on-surface-variant">Individual</span>
+                </div>
+                <div class="flex justify-between items-start pt-2">
+                  <div>
+                    <span class="font-label-sm text-[11px] text-secondary uppercase font-bold tracking-wider">Servicio</span>
+                    <p class="font-title-md text-xs text-on-surface font-semibold mt-0.5" id="summary-servicio-nombre">{{ servicio_seleccionado.nombre }}</p>
+                    <p class="font-body-sm text-[11px] text-on-surface-variant">{{ servicio_seleccionado.badge }}</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="font-body-md text-sm text-primary font-bold" id="summary-servicio-precio">{{ servicio_seleccionado.precio_formateado }}</span>
+                  </div>
+                </div>
+                <div class="pt-2 grid grid-cols-2 gap-2 text-on-surface">
+                  <div class="bg-surface-container/70 border border-outline-variant/40 p-2.5 rounded-lg">
+                    <span class="font-label-sm text-[11px] text-outline block">Fecha</span>
+                    <span class="font-body-sm text-xs font-semibold text-on-surface" id="summary-fecha">{{ fecha_seleccionada|date:"D d M, Y" }}</span>
+                  </div>
+                  <div class="bg-surface-container/70 border border-outline-variant/40 p-2.5 rounded-lg">
+                    <span class="font-label-sm text-[11px] text-outline block">Horario</span>
+                    <span class="font-body-sm text-xs font-semibold text-primary" id="summary-hora">{{ hora_seleccionada }} hrs</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-1 text-on-surface-variant font-label-sm text-xs">
+                  <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm text-primary">timelapse</span> Duración estimada
+                  </span>
+                  <span class="font-semibold text-on-surface">{{ servicio_seleccionado.duracion_texto }}</span>
+                </div>
+              </div>
+
+              <!-- Price Total Calculation -->
+              <div class="pt-5 pb-5 space-y-2">
+                <div class="flex justify-between items-center text-xs text-on-surface-variant">
+                  <span>Subtotal servicio</span>
+                  <span>{{ servicio_seleccionado.precio_formateado }}</span>
+                </div>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant">
+                  <span>Cargo por reserva anticipada</span>
+                  <span class="text-secondary font-medium">$0 (Gratis)</span>
+                </div>
+                <div class="flex justify-between items-baseline pt-2">
+                  <span class="font-title-md text-sm text-on-surface font-bold">Total a pagar en sesión</span>
+                  <span class="font-headline-lg text-2xl text-primary font-bold tracking-tight">{{ servicio_seleccionado.precio_formateado }}</span>
+                </div>
+                <p class="font-label-sm text-[11px] text-outline text-right">Pesos Chilenos (CLP) con IVA incluido</p>
+              </div>
+
+              <!-- Cancellation Policy Pill Notice -->
+              <div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/40 mb-6 flex items-start space-x-2.5">
+                <span class="material-symbols-outlined text-secondary text-base shrink-0 mt-0.5">verified_user</span>
+                <p class="font-body-sm text-xs text-on-surface-variant leading-snug">
+                  <strong class="text-on-surface font-semibold">Cancelación Flexible:</strong> Podrás reprogramar o cancelar libremente hasta 2 horas previas a la cita usando el enlace de tu comprobante.
+                </p>
+              </div>
+
+              <!-- CTA Submit Button -->
+              <div class="space-y-3">
+                <button type="submit" class="w-full bg-gradient-to-r from-primary via-primary-container to-secondary text-on-primary py-4 px-6 rounded-full font-headline-sm text-sm font-bold tracking-wide shadow-[0_0_25px_rgba(212,187,255,0.35)] hover:shadow-[0_0_35px_rgba(246,173,255,0.5)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2 cursor-pointer" id="confirm-booking-btn">
+                  <span>Confirmar Reserva Inmediata ({{ servicio_seleccionado.precio_formateado }})</span>
+                  <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+                <p class="font-body-sm text-xs text-center text-on-surface-variant px-2 leading-relaxed">
+                  No se requiere pago previo ni registro. Recibirás comprobante oficial con código de cancelación directamente por correo.
+                </p>
+              </div>
+
+              <!-- Security Footnote -->
+              <div class="mt-6 pt-4 flex items-center justify-center space-x-4 text-outline font-label-sm text-xs border-t border-outline-variant/30">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">lock</span> Transacción 256-bit</span>
+                <span>•</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">auto_awesome</span> Confirmación Instantánea</span>
+              </div>
+            </div>
+
+            <!-- Studio Concierge Card -->
+            <div class="p-5 rounded-2xl bg-surface-container-low/80 border border-outline-variant/50 flex items-center space-x-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-2xl">support_agent</span>
+              </div>
+              <div class="min-w-0">
+                <p class="font-title-md text-xs text-on-surface font-semibold">¿Dudas con la modalidad o comuna?</p>
+                <p class="font-body-sm text-xs text-on-surface-variant truncate">Coordinación directa con nuestras 3 especialistas</p>
+                <a class="text-secondary hover:text-primary font-label-md text-xs font-semibold inline-flex items-center gap-1 mt-0.5 transition-colors" href="https://wa.me/" rel="noopener" target="_blank">
+                  <span>Contactar a Concierge Ro Studio</span>
+                  <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function cambiarServicio(servicioId) {
+    window.location.href = "{% url 'reserva' %}?servicio_id=" + servicioId + "&fecha={{ fecha_seleccionada_str }}&hora=" + document.getElementById('input_hora').value;
+  }
+
+  function seleccionarFecha(fechaVal) {
+    window.location.href = "{% url 'reserva' %}?servicio_id={{ servicio_seleccionado.id }}&fecha=" + fechaVal + "&hora=" + document.getElementById('input_hora').value;
+  }
+
+  function seleccionarDiaOffset(dias) {
+    const d = new Date();
+    d.setDate(d.getDate() + dias);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    seleccionarFecha(`${yyyy}-${mm}-${dd}`);
+  }
+
+  function seleccionarHora(horaVal) {
+    document.getElementById('input_hora').value = horaVal;
+    document.getElementById('summary-hora').textContent = horaVal + ' hrs';
+    document.getElementById('stepper-hora-label').textContent = horaVal + ' hrs';
+    
+    // Update slot styles
+    document.querySelectorAll('.time-slot-btn').forEach(btn => {
+      if (btn.getAttribute('data-hora') === horaVal) {
+        btn.className = "time-slot-btn p-3.5 rounded-xl bg-gradient-to-br from-primary/30 to-primary-container/20 text-on-surface border-2 border-primary shadow-[0_0_20px_rgba(212,187,255,0.25)] transition-all text-left flex flex-col cursor-pointer group";
+      } else {
+        btn.className = "time-slot-btn p-3.5 rounded-xl bg-surface-container-lowest/80 border border-outline-variant/60 text-on-surface hover:border-primary/70 hover:bg-primary/5 transition-all text-left flex flex-col cursor-pointer group";
+      }
+    });
+  }
+</script>
+{% endblock %}

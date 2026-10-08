@@ -1,0 +1,283 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{% block title %}Ro Studio — Estética Integral{% endblock %}</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    
+    .cosmic-radial-glow {
+      background: radial-gradient(circle at 50% 20%, rgba(179, 136, 255, 0.15), rgba(164, 2, 196, 0.05) 50%, transparent 80%);
+    }
+    .dark .cosmic-card-border {
+      border: 1px solid rgba(212, 187, 255, 0.12);
+    }
+    .light .cosmic-card-border {
+      border: 1px solid rgba(108, 28, 46, 0.1);
+    }
+    .star-field {
+      background-image: radial-gradient(circle at 15% 20%, rgba(212, 187, 255, 0.08) 1px, transparent 1px),
+                        radial-gradient(circle at 85% 35%, rgba(246, 173, 255, 0.06) 1.5px, transparent 1.5px),
+                        radial-gradient(circle at 45% 75%, rgba(212, 187, 255, 0.07) 1px, transparent 1px),
+                        radial-gradient(circle at 70% 85%, rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
+      background-size: 180px 180px;
+    }
+    .cosmic-glow {
+      box-shadow: 0 0 30px -5px rgba(179, 136, 255, 0.25);
+    }
+    .glass-card {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .cosmic-card {
+      background: radial-gradient(120% 120% at 50% 0%, rgba(31,31,37,0.7) 0%, rgba(14,14,19,0.95) 100%);
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-low": "#1b1b20",
+            "surface-dim": "#131318",
+            "secondary-fixed-dim": "#f6adff",
+            "on-primary-fixed-variant": "#582a9f",
+            "on-primary": "#260058",
+            "inverse-on-surface": "#303036",
+            "on-primary-fixed": "#260058",
+            "surface-tint": "#d4bbff",
+            "on-surface-variant": "#ccc3d4",
+            "surface-container-highest": "#35343a",
+            "on-secondary-fixed-variant": "#7a0092",
+            "on-background": "#e4e1e9",
+            "on-error-container": "#ffdad6",
+            "secondary": "#f6adff",
+            "on-error": "#690005",
+            "tertiary-fixed-dim": "#c5c6c8",
+            "on-surface": "#e4e1e9",
+            "primary-fixed-dim": "#d4bbff",
+            "on-tertiary-fixed-variant": "#444749",
+            "tertiary-fixed": "#e1e2e4",
+            "on-tertiary-fixed": "#191c1e",
+            "primary-container": "#b388ff",
+            "outline-variant": "#4a4452",
+            "tertiary": "#c5c6c8",
+            "tertiary-container": "#9d9fa1",
+            "inverse-primary": "#7046b8",
+            "surface-bright": "#39383e",
+            "error": "#ffb4ab",
+            "secondary-container": "#a402c4",
+            "surface-variant": "#35343a",
+            "background": "#0e0e13",
+            "surface": "#131318",
+            "surface-container-high": "#2a292f",
+            "on-secondary": "#560068",
+            "secondary-fixed": "#fed6ff",
+            "inverse-surface": "#e4e1e9",
+            "on-secondary-container": "#fdcdff",
+            "error-container": "#93000a",
+            "surface-container": "#1f1f25",
+            "on-tertiary-container": "#343638",
+            "primary-fixed": "#ebdcff",
+            "on-primary-container": "#46128d",
+            "on-tertiary": "#2e3132",
+            "outline": "#958e9d",
+            "on-secondary-fixed": "#350041",
+            "surface-container-lowest": "#0a0a0f",
+            "primary": "#d4bbff"
+          },
+          fontFamily: {
+            "title-lg": ["Playfair Display", "serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Playfair Display", "serif"],
+            "headline-sm": ["Playfair Display", "serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-xl": ["Playfair Display", "serif"],
+            "label-md": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Playfair Display", "serif"],
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Space Grotesk", "sans-serif"],
+            "label-lg": ["Space Grotesk", "sans-serif"],
+            "display-lg": ["Playfair Display", "serif"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0b0b11] dark:bg-[#0a0a10] text-[#1f1a1b] dark:text-[#e4e1e9] font-body-md antialiased transition-colors duration-500 star-field min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER PÚBLICO -->
+  <header class="fixed top-0 w-full z-50 bg-[#fff8f8]/90 dark:bg-[#0d0d14]/90 backdrop-blur-xl border-b border-black/5 dark:border-[#2a2838] transition-colors duration-500">
+    <div class="h-20 w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between">
+      <!-- Brand Logo + Name -->
+      <a class="flex items-center space-x-3.5 group" href="{% url 'inicio' %}">
+        <div class="h-12 w-12 rounded-full overflow-hidden bg-black ring-2 ring-[#d4bbff]/40 shadow-lg shadow-[#b388ff]/20 flex items-center justify-center p-1 shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <img alt="Ro Studio Logo" class="h-full w-full object-contain filter drop-shadow-[0_0_8px_rgba(212,187,255,0.7)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlhr6ygVrormktH1FFl6YZIry23oVRKdT2cLv_gKASshF8tfKcntS962YRoMsL_LIFkm-18LZIgc6KUF1g2vgxJlhWOiussniE4hXcONjtQid2QEn-uh0_FekBkDuaJ2g30hz5p4QQ8su4jHVcgSD0xDqbDhlElVmOAKCFzcWNH0piqwT9pIVxRtp2Rf5wXvIBpivN1dNQVhUoVilBwSE6NvrKsdbH9w_MkNGn-i0hl84_A_Zgd9cN">
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center space-x-1.5">
+            <span class="font-headline-sm text-xl font-bold tracking-tight text-[#6c1c2e] dark:text-[#f2e6ff] group-hover:text-[#b388ff] transition-colors">Ro Studio</span>
+            <span class="text-[#d4bbff] text-xs font-semibold">✦</span>
+          </div>
+          <span class="font-label-sm text-[10px] uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff]/80">Estética Integral • Uñas • Pelo • Maquillaje</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation con URLs reales de Django -->
+      <nav class="hidden xl:flex items-center space-x-2">
+        <a class="transition-all {% if pagina_actual == 'inicio' %}bg-[#8a3344] dark:bg-[#b388ff] text-white dark:text-[#260058] shadow-sm shadow-[#b388ff]/20{% else %}text-neutral-600 dark:text-[#ccc3d4] hover:text-[#b388ff] dark:hover:text-[#ffffff] hover:bg-white/5{% endif %} font-label-md text-xs uppercase tracking-wider py-2 px-4 rounded-full" href="{% url 'inicio' %}">
+          Inicio
+        </a>
+        <a class="transition-all {% if pagina_actual == 'servicios' %}bg-[#8a3344] dark:bg-[#b388ff] text-white dark:text-[#260058] shadow-sm shadow-[#b388ff]/20{% else %}text-neutral-600 dark:text-[#ccc3d4] hover:text-[#b388ff] dark:hover:text-[#ffffff] hover:bg-white/5{% endif %} font-label-md text-xs uppercase tracking-wider py-2 px-4 rounded-full" href="{% url 'servicios' %}">
+          Servicios &amp; Tarifas
+        </a>
+        <a class="transition-all {% if pagina_actual == 'reserva' or pagina_actual == 'reserva_confirmada' %}bg-[#8a3344] dark:bg-[#b388ff] text-white dark:text-[#260058] shadow-sm shadow-[#b388ff]/20{% else %}text-neutral-600 dark:text-[#ccc3d4] hover:text-[#b388ff] dark:hover:text-[#ffffff] hover:bg-white/5{% endif %} font-label-md text-xs uppercase tracking-wider py-2 px-4 rounded-full flex items-center gap-1.5" href="{% url 'reserva' %}">
+          <span>✦</span> Reservar Cita
+        </a>
+        <a class="transition-all {% if pagina_actual == 'contacto' %}bg-[#8a3344] dark:bg-[#b388ff] text-white dark:text-[#260058] shadow-sm shadow-[#b388ff]/20{% else %}text-neutral-600 dark:text-[#ccc3d4] hover:text-[#b388ff] dark:hover:text-[#ffffff] hover:bg-white/5{% endif %} font-label-md text-xs uppercase tracking-wider py-2 px-4 rounded-full" href="{% url 'contacto' %}">
+          Información &amp; Contacto
+        </a>
+      </nav>
+
+      <!-- Right Controls: Status, Theme Toggle, WhatsApp (NO admin buttons visible to public) -->
+      <div class="flex items-center space-x-3">
+        <!-- Live Status Pill -->
+        <div class="hidden md:flex items-center space-x-2 bg-neutral-100 dark:bg-[#1a1924] border border-black/5 dark:border-[#2a2838] px-3 py-1.5 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-[#f6adff] animate-ping"></span>
+          <span class="font-label-sm text-xs text-neutral-600 dark:text-[#ccc3d4]">Abierto hoy 09:00 - 20:00</span>
+        </div>
+
+        <!-- THEME TOGGLE BUTTON -->
+        <button aria-label="Cambiar tema oscuro/claro" class="relative inline-flex items-center justify-center p-2 rounded-full bg-neutral-200/80 dark:bg-[#1e1d2b] border border-black/10 dark:border-[#38334e] text-neutral-700 dark:text-[#d4bbff] hover:scale-105 hover:border-[#b388ff] transition-all shadow-inner group" id="themeToggleBtn" type="button">
+          <span class="material-symbols-outlined text-lg dark:block hidden text-[#d4bbff] group-hover:rotate-12 transition-transform">dark_mode</span>
+          <span class="material-symbols-outlined text-lg dark:hidden block text-[#7c572c] group-hover:rotate-45 transition-transform">light_mode</span>
+        </button>
+
+        <!-- WhatsApp Direct -->
+        <a class="hidden sm:flex items-center space-x-1.5 bg-[#fdcb97] dark:bg-[#2e1240] border border-black/5 dark:border-[#6a1b9a]/50 px-3.5 py-1.5 rounded-full text-[#78542a] dark:text-[#f6adff] font-label-md text-xs font-semibold hover:bg-[#eebe8a] dark:hover:bg-[#46128d] transition-all" href="https://wa.me/" rel="noopener" target="_blank">
+          <span class="material-symbols-outlined text-base">chat</span>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="w-full pt-20 bg-[#faf6f7] dark:bg-[#0a0a10] min-h-[calc(100vh-20rem)] transition-colors duration-500 flex-1">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- FOOTER PÚBLICO -->
+  <footer class="w-full bg-[#f4eff0] dark:bg-[#07070c] border-t border-black/5 dark:border-[#1e1c2b] py-16 transition-colors duration-500">
+    <div class="w-full px-4 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <!-- Ro Studio Brand Footer with Official Logo -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 rounded-full bg-black p-1 flex items-center justify-center shrink-0 ring-1 ring-[#b388ff]/40 shadow-lg shadow-[#b388ff]/20">
+              <img alt="Ro Studio Logo" class="h-full w-full object-contain filter drop-shadow-[0_0_8px_rgba(212,187,255,0.7)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDfLCttE0ykLy_1inQezn4CJJWWFjdwAwSJpIyRBEs8wRwb-XFOYZhCBs-XO5_iWYCoewWwGV6PZLiI_My_dDdkzfdGGys7rJXbM_U49nnfJlrjjeVfoamMA57WpNgCHxKxJ2Qi5yDm-qoIW05DP77FjcgcltMdYKrdTjhe5LLHEcvq9qWvKIArbqH5_BoLsGiZB5YV2su9FVKkqVt7E8CkieDlt1STI4MSOZkrGAF-UAqlf6BfmHv">
+            </div>
+            <div class="flex flex-col">
+              <span class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Ro Studio</span>
+              <span class="font-label-sm text-[10px] uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff]">Estética Integral</span>
+            </div>
+          </div>
+          <p class="font-body-sm text-xs leading-relaxed text-neutral-600 dark:text-[#ccc3d4]">Equipo exclusivo de 3 artistas independientes de belleza itinerante. Protocolos de autor en manicura, estilismo de cabello y maquillaje sin local comercial, a domicilio o en estudio privado.</p>
+          <div class="flex items-center space-x-2 pt-1 text-[#78542a] dark:text-[#d4bbff] font-label-sm text-xs">
+            <span class="material-symbols-outlined text-base">verified</span>
+            <span>Atención Exclusiva con Cita Previa</span>
+          </div>
+        </div>
+
+        <!-- Dirección -->
+        <div class="space-y-3">
+          <span class="font-label-md text-xs uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff] block font-semibold">Modalidad &amp; Cobertura</span>
+          <p class="font-body-sm text-xs sm:text-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed">Atención a tu domicilio o estudio privado de la especialista.<br><span class="text-[#f6adff] font-medium">Sin salón comercial fijo.</span></p>
+          <p class="font-body-sm text-xs text-neutral-500 dark:text-[#a09baa]">Cobertura metropolitana con traslado de instrumental esterilizado de alta gama.</p>
+        </div>
+
+        <!-- Horarios -->
+        <div class="space-y-3">
+          <span class="font-label-md text-xs uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff] block font-semibold">Horarios de Atención</span>
+          <ul class="space-y-1.5 font-body-sm text-xs sm:text-sm text-neutral-600 dark:text-[#ccc3d4]">
+            <li>Lunes a Viernes: 09:00 – 20:00</li>
+            <li>Sábados: 10:00 – 18:00</li>
+            <li>Domingos: Sesiones nupciales exclusivas</li>
+          </ul>
+        </div>
+
+        <!-- Garantía Ro Studio -->
+        <div class="space-y-3">
+          <span class="font-label-md text-xs uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff] block font-semibold">Garantía Ro Studio</span>
+          <div class="flex flex-col space-y-2">
+            <div class="flex items-center space-x-2 bg-white/70 dark:bg-[#141220] border border-black/5 dark:border-[#2a263d] px-3 py-2 rounded-xl">
+              <span class="material-symbols-outlined text-[#6c1c2e] dark:text-[#d4bbff] text-base">lock_open</span>
+              <span class="font-label-sm text-xs text-neutral-800 dark:text-[#e4e1e9]">Sin registro necesario</span>
+            </div>
+            <div class="flex items-center space-x-2 bg-white/70 dark:bg-[#141220] border border-black/5 dark:border-[#2a263d] px-3 py-2 rounded-xl">
+              <span class="material-symbols-outlined text-[#6c1c2e] dark:text-[#d4bbff] text-base">done_all</span>
+              <span class="font-label-sm text-xs text-neutral-800 dark:text-[#e4e1e9]">Confirmación al instante</span>
+            </div>
+            <div class="flex items-center space-x-2 bg-white/70 dark:bg-[#141220] border border-black/5 dark:border-[#2a263d] px-3 py-2 rounded-xl">
+              <span class="material-symbols-outlined text-[#6c1c2e] dark:text-[#d4bbff] text-base">spa</span>
+              <span class="font-label-sm text-xs text-neutral-800 dark:text-[#e4e1e9]">Cosmética libre de tóxicos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="pt-8 border-t border-black/5 dark:border-[#1a1826] flex flex-col md:flex-row items-center justify-between text-neutral-500 dark:text-[#958e9d] font-body-sm text-xs">
+        <p>© 2026 Ro Studio — Estética Integral. Todos los derechos reservados.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a class="hover:text-neutral-900 dark:hover:text-white transition-colors" href="{% url 'contacto' %}">Privacidad &amp; Protocolos</a>
+          <a class="hover:text-neutral-900 dark:hover:text-white transition-colors" href="{% url 'reserva' %}">Términos de Reserva</a>
+          <a class="hover:text-neutral-900 dark:hover:text-white transition-colors" href="https://wa.me/" target="_blank">Concierge VIP</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT FOR DYNAMIC DARK / LIGHT THEME TOGGLE -->
+  <script>
+    (function initTheme() {
+      const toggleBtn = document.getElementById('themeToggleBtn');
+      const htmlEl = document.documentElement;
+
+      if (!htmlEl.classList.contains('dark') && !htmlEl.classList.contains('light')) {
+        htmlEl.classList.add('dark');
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          if (htmlEl.classList.contains('dark')) {
+            htmlEl.classList.remove('dark');
+            htmlEl.classList.add('light');
+          } else {
+            htmlEl.classList.remove('light');
+            htmlEl.classList.add('dark');
+          }
+        });
+      }
+    })();
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

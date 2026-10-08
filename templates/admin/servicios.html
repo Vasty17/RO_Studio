@@ -1,0 +1,214 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Gestión de Servicios — Administración Ro Studio{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+  <!-- Header con botón para nuevo servicio -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-white">Catálogo de Servicios</h1>
+      <p class="text-xs text-neutral-400">Edita títulos, tarifas y descripciones. Cualquier cambio se actualiza inmediatamente en la web pública.</p>
+    </div>
+    <button type="button" onclick="abrirModalNuevo()" class="px-4 py-2.5 bg-gradient-to-r from-primary to-secondary text-[#190236] rounded-xl text-xs font-bold uppercase tracking-wider hover:opacity-95 transition-opacity flex items-center gap-1.5 self-start sm:self-auto shadow-md">
+      <span class="material-symbols-outlined text-base">add_circle</span>
+      <span>Nuevo Servicio</span>
+    </button>
+  </div>
+
+  <!-- Grid de tarjetas de servicios con botón de edición rápida -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% for s in servicios %}
+    <div class="bg-[#13131c] border border-white/10 rounded-2xl p-6 flex flex-col justify-between space-y-4 hover:border-primary/40 transition-all shadow-lg" id="card-servicio-{{ s.id }}">
+      <div class="space-y-3">
+        <!-- Top metadata -->
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-secondary font-semibold flex items-center gap-1">
+            <span>{{ s.categoria.emoji }}</span>
+            <span>{{ s.categoria.nombre }}</span>
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold {% if s.activo %}bg-emerald-950/80 text-emerald-400 border border-emerald-800{% else %}bg-red-950/80 text-red-400 border border-red-800{% endif %}">
+            {% if s.activo %}Activo{% else %}Pausado{% endif %}
+          </span>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-lg text-white" id="titulo-{{ s.id }}">{{ s.nombre }}</h3>
+          {% if s.badge %}
+          <span class="inline-block mt-1 text-[11px] px-2 py-0.5 rounded-md bg-white/5 text-primary border border-white/10 font-medium">
+            {{ s.badge }}
+          </span>
+          {% endif %}
+        </div>
+
+        <p class="text-xs text-neutral-400 leading-relaxed" id="desc-{{ s.id }}">
+          {{ s.descripcion }}
+        </p>
+      </div>
+
+      <!-- Tarifa, duración y acciones -->
+      <div class="pt-4 border-t border-white/5 space-y-3">
+        <div class="flex items-baseline justify-between">
+          <div>
+            <span class="text-[10px] text-neutral-500 uppercase tracking-wider block">Tarifa Actual</span>
+            <span class="text-xl font-bold text-primary" id="precio-{{ s.id }}">{{ s.precio_formateado }}</span>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-neutral-500 uppercase tracking-wider block">Duración</span>
+            <span class="text-xs font-semibold text-neutral-300" id="duracion-{{ s.id }}">{{ s.duracion_texto }}</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <!-- Botón Editar -->
+          <button type="button" 
+                  onclick="abrirModalEditar({{ s.id }}, '{{ s.nombre|escapejs }}', {{ s.precio }}, {{ s.duracion_minutos }}, '{{ s.categoria.id }}', '{{ s.badge|escapejs }}', '{{ s.descripcion|escapejs }}', {{ s.activo|yesno:'true,false' }})"
+                  class="flex-1 py-2 bg-primary/20 hover:bg-primary/30 border border-primary/50 text-primary rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1">
+            <span class="material-symbols-outlined text-sm">edit</span>
+            <span>Editar</span>
+          </button>
+
+          <!-- Botón Pausar / Activar -->
+          <form method="post" action="{% url 'admin_servicios' %}" class="inline">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="toggle">
+            <input type="hidden" name="servicio_id" value="{{ s.id }}">
+            <button type="submit" 
+                    title="{% if s.activo %}Pausar servicio{% else %}Activar servicio{% endif %}"
+                    class="p-2 rounded-xl text-xs font-semibold border transition-all flex items-center justify-center {% if s.activo %}bg-amber-950/40 hover:bg-amber-900 border-amber-800 text-amber-300{% else %}bg-emerald-950/40 hover:bg-emerald-900 border-emerald-800 text-emerald-300{% endif %}">
+              <span class="material-symbols-outlined text-base">{% if s.activo %}pause_circle{% else %}play_circle{% endif %}</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- MODAL DE EDICIÓN / CREACIÓN DE SERVICIO -->
+<div id="modalServicio" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+  <div class="bg-[#13131c] border border-white/20 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+    
+    <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-2xl">auto_fix_high</span>
+        <h2 class="text-xl font-bold text-white" id="modalTitulo">Editar Servicio</h2>
+      </div>
+      <button type="button" onclick="cerrarModal()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white flex items-center justify-center">
+        <span class="material-symbols-outlined text-base">close</span>
+      </button>
+    </div>
+
+    <form method="post" action="{% url 'admin_servicios' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="guardar">
+      <input type="hidden" name="servicio_id" id="form_servicio_id" value="">
+
+      <!-- Nombre / Título -->
+      <div>
+        <label class="block text-xs font-semibold text-neutral-300 mb-1">Título del Servicio <span class="text-primary">*</span></label>
+        <input type="text" name="nombre" id="form_nombre" required class="w-full bg-[#1b1b24] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary" placeholder="Ej: Manicure Permanente de Autor">
+      </div>
+
+      <!-- Tarifa y Duración -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">Tarifa en CLP ($) <span class="text-primary">*</span></label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-2.5 text-neutral-400 text-sm">$</span>
+            <input type="number" name="precio" id="form_precio" required min="0" step="500" class="w-full bg-[#1b1b24] border border-white/10 rounded-xl pl-8 pr-4 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-primary" placeholder="24000">
+          </div>
+          <span class="text-[11px] text-neutral-500 mt-0.5 block">Ej: 24000 para $24.000</span>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">Duración (minutos) <span class="text-primary">*</span></label>
+          <div class="relative">
+            <input type="number" name="duracion_minutos" id="form_duracion" required min="5" step="5" class="w-full bg-[#1b1b24] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-primary" placeholder="60">
+            <span class="absolute right-3.5 top-2.5 text-neutral-400 text-xs">min</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categoría y Distintivo Badge -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">Categoría <span class="text-primary">*</span></label>
+          <select name="categoria_id" id="form_categoria_id" required class="w-full bg-[#1b1b24] border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-primary">
+            {% for cat in categorias %}
+            <option value="{{ cat.id }}">{{ cat.emoji }} {{ cat.nombre }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">Distintivo / Badge</label>
+          <input type="text" name="badge" id="form_badge" class="w-full bg-[#1b1b24] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary" placeholder="Ej: Disponible Hoy, Firma Exclusiva...">
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label class="block text-xs font-semibold text-neutral-300 mb-1">Descripción del Servicio <span class="text-primary">*</span></label>
+        <textarea name="descripcion" id="form_descripcion" rows="3" required class="w-full bg-[#1b1b24] border border-white/10 rounded-xl p-3 text-xs sm:text-sm text-white focus:outline-none focus:border-primary resize-none" placeholder="Describe los protocolos botánicos, técnicas de autor o detalles..."></textarea>
+      </div>
+
+      <!-- Checkbox Activo -->
+      <div class="flex items-center space-x-2 pt-1">
+        <input type="checkbox" name="activo" id="form_activo" class="h-4 w-4 rounded accent-primary bg-[#1b1b24] border-white/20">
+        <label for="form_activo" class="text-xs text-neutral-300 cursor-pointer font-medium">Servicio activo y visible para los clientes</label>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+        <button type="button" onclick="cerrarModal()" class="px-5 py-2.5 rounded-xl border border-white/10 text-neutral-300 hover:text-white text-xs font-semibold transition-colors">
+          Cancelar
+        </button>
+        <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-[#190236] text-xs font-bold uppercase tracking-wider hover:opacity-95 transition-all shadow-md">
+          Guardar Cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function abrirModalEditar(id, nombre, precio, duracion, categoriaId, badge, descripcion, activo) {
+    document.getElementById('modalTitulo').textContent = 'Editar Servicio';
+    document.getElementById('form_servicio_id').value = id;
+    document.getElementById('form_nombre').value = nombre;
+    document.getElementById('form_precio').value = precio;
+    document.getElementById('form_duracion').value = duracion;
+    document.getElementById('form_categoria_id').value = categoriaId;
+    document.getElementById('form_badge').value = badge;
+    document.getElementById('form_descripcion').value = descripcion;
+    document.getElementById('form_activo').checked = activo;
+
+    const modal = document.getElementById('modalServicio');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function abrirModalNuevo() {
+    document.getElementById('modalTitulo').textContent = 'Nuevo Servicio';
+    document.getElementById('form_servicio_id').value = '';
+    document.getElementById('form_nombre').value = '';
+    document.getElementById('form_precio').value = '20000';
+    document.getElementById('form_duracion').value = '60';
+    document.getElementById('form_badge').value = 'Disponible Hoy';
+    document.getElementById('form_descripcion').value = '';
+    document.getElementById('form_activo').checked = true;
+
+    const modal = document.getElementById('modalServicio');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function cerrarModal() {
+    const modal = document.getElementById('modalServicio');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+</script>
+{% endblock %}

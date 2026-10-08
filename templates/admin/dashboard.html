@@ -1,0 +1,87 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Dashboard — Administración Ro Studio{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-white">Dashboard General</h1>
+      <p class="text-xs text-neutral-400">Resumen operativo de citas y disponibilidad en tiempo real.</p>
+    </div>
+    <div class="flex space-x-3">
+      <a href="{% url 'admin_reservas' %}" class="px-4 py-2 bg-primary/20 text-primary border border-primary/40 rounded-xl text-xs font-semibold hover:bg-primary/30">Gestionar Reservas</a>
+      <a href="{% url 'admin_horarios' %}" class="px-4 py-2 bg-[#1b1b24] text-white border border-white/10 rounded-xl text-xs font-semibold hover:bg-white/10">Ver Agenda Hoy</a>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-[#13131c] border border-white/10 p-5 rounded-2xl">
+      <span class="text-neutral-400 text-xs uppercase tracking-wider block font-medium">Total Reservas</span>
+      <span class="text-3xl font-bold text-primary mt-2 block">{{ total_reservas }}</span>
+      <span class="text-[11px] text-neutral-500 mt-1 block">Historial completo</span>
+    </div>
+    <div class="bg-[#13131c] border border-white/10 p-5 rounded-2xl">
+      <span class="text-neutral-400 text-xs uppercase tracking-wider block font-medium">Citas Hoy</span>
+      <span class="text-3xl font-bold text-secondary mt-2 block">{{ reservas_hoy }}</span>
+      <span class="text-[11px] text-neutral-500 mt-1 block">Para la jornada actual</span>
+    </div>
+    <div class="bg-[#13131c] border border-white/10 p-5 rounded-2xl">
+      <span class="text-neutral-400 text-xs uppercase tracking-wider block font-medium">Confirmadas Activas</span>
+      <span class="text-3xl font-bold text-white mt-2 block">{{ reservas_pendientes }}</span>
+      <span class="text-[11px] text-emerald-400 mt-1 block">Cupos bloqueados en BD</span>
+    </div>
+    <div class="bg-[#13131c] border border-white/10 p-5 rounded-2xl">
+      <span class="text-neutral-400 text-xs uppercase tracking-wider block font-medium">Servicios Activos</span>
+      <span class="text-3xl font-bold text-primary mt-2 block">{{ total_servicios }}</span>
+      <span class="text-[11px] text-neutral-500 mt-1 block">Catálogo en línea</span>
+    </div>
+  </div>
+
+  <!-- Últimas Reservas -->
+  <div class="bg-[#13131c] border border-white/10 rounded-2xl p-6">
+    <div class="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+      <h2 class="text-base font-bold text-white">Últimas Citas Registradas</h2>
+      <a href="{% url 'admin_reservas' %}" class="text-xs text-primary hover:underline">Ver todas →</a>
+    </div>
+
+    {% if ultimas_reservas %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="text-neutral-400 border-b border-white/5 pb-2">
+            <th class="py-2.5">Código</th>
+            <th class="py-2.5">Cliente</th>
+            <th class="py-2.5">Servicio</th>
+            <th class="py-2.5">Fecha &amp; Hora</th>
+            <th class="py-2.5">Modalidad</th>
+            <th class="py-2.5">Teléfono</th>
+            <th class="py-2.5">Estado</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          {% for r in ultimas_reservas %}
+          <tr class="hover:bg-white/5 transition-colors">
+            <td class="py-3 font-mono font-bold text-primary">{{ r.codigo }}</td>
+            <td class="py-3 font-semibold text-white">{{ r.nombre_completo }}</td>
+            <td class="py-3 text-neutral-300">{{ r.servicio.nombre }}</td>
+            <td class="py-3 text-secondary">{{ r.fecha|date:"d/m/Y" }} {{ r.hora }} hrs</td>
+            <td class="py-3 text-neutral-400 capitalize">{{ r.get_modalidad_display }}</td>
+            <td class="py-3 font-mono text-neutral-400">{{ r.telefono }}</td>
+            <td class="py-3">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {% if r.estado == 'confirmada' %}bg-emerald-950 text-emerald-400 border border-emerald-800{% elif r.estado == 'cancelada' %}bg-red-950 text-red-400 border border-red-800{% else %}bg-amber-950 text-amber-400 border border-amber-800{% endif %}">
+                {{ r.get_estado_display }}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-neutral-500 text-xs py-6 text-center">No hay reservas registradas aún.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

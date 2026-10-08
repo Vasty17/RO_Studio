@@ -1,0 +1,475 @@
+{% extends 'base.html' %}
+
+{% block title %}Ro Studio — Estética Integral | Alta Cosmética & Soins Privés{% endblock %}
+
+{% block content %}
+<div class="flex flex-col w-full">
+  <!-- HERO LUXURY SECTION WITH CELESTIAL STARDUST AESTHETIC -->
+  <section class="relative w-full overflow-hidden px-4 sm:px-8 lg:px-12 py-12 lg:py-24">
+    <!-- Cosmic glow orbs matching Ro Studio emblem -->
+    <div class="absolute -top-32 right-1/4 w-[32rem] h-[32rem] rounded-full bg-[#b388ff]/15 dark:bg-[#b388ff]/20 blur-[110px] pointer-events-none"></div>
+    <div class="absolute top-1/2 -left-20 w-96 h-96 rounded-full bg-[#a402c4]/10 dark:bg-[#a402c4]/20 blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-[#f6adff]/10 dark:bg-[#582a9f]/30 blur-[90px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+      <!-- Columna Izquierda: Mensaje y CTA -->
+      <div class="lg:col-span-7 flex flex-col space-y-6">
+        <div class="inline-flex items-center space-x-2.5 bg-white/70 dark:bg-[#161522]/80 backdrop-blur-md px-4 py-2 rounded-full self-start border border-black/5 dark:border-[#2f2b42] shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-[#b388ff] animate-pulse"></span>
+          <span class="font-label-md text-xs text-neutral-700 dark:text-[#d4bbff] uppercase tracking-widest">✦ Haute Cosmétique &amp; Soins Privés ✦</span>
+        </div>
+
+        <h1 class="font-display-lg text-4xl sm:text-5xl lg:text-[4rem] lg:leading-[4.5rem] text-[#400688] dark:text-[#f8f5ff] font-normal tracking-tight">
+          La experiencia de belleza <span class="italic font-light text-[#a402c4] dark:text-[#d4bbff]">hecha a tu medida.</span>
+        </h1>
+
+        <p class="font-body-lg text-base sm:text-lg text-neutral-600 dark:text-[#ccc3d4] max-w-2xl leading-relaxed">
+          Equipo exclusivo de 3 artistas especializadas en <span class="text-neutral-900 dark:text-white font-medium">Uñas (💅)</span>, <span class="text-neutral-900 dark:text-white font-medium">Pelo (💇)</span> y <span class="text-neutral-900 dark:text-white font-medium">Maquillaje (💄)</span>. Servicio itinerante prémium: te atendemos en la comodidad de tu domicilio o en el estudio privado de la especialista. Sin salón comercial fijo.
+        </p>
+
+        <!-- CTA Principal y Secundario con Django URLs reales -->
+        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+          <a class="group inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#6c1c2e] via-[#8a3344] to-[#6c1c2e] dark:from-[#b388ff] dark:via-[#d4bbff] dark:to-[#b388ff] text-white dark:text-[#190236] px-8 py-4 rounded-full shadow-lg shadow-black/10 dark:shadow-[#b388ff]/30 hover:scale-[1.02] transition-all duration-300 font-semibold" href="{% url 'reserva' %}">
+            <span class="material-symbols-outlined text-lg text-pink-200 dark:text-[#46128d]">calendar_month</span>
+            <span class="font-label-md tracking-wider uppercase text-xs sm:text-sm">RESERVAR HORA AHORA</span>
+            <span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1">arrow_forward</span>
+          </a>
+          <a class="inline-flex items-center justify-center space-x-2 bg-white/80 dark:bg-[#161522]/90 text-neutral-800 dark:text-[#e4e1e9] border border-black/10 dark:border-[#2f2b42] px-6 py-4 rounded-full shadow-sm hover:border-[#b388ff] hover:text-[#b388ff] dark:hover:text-[#ffffff] transition-all duration-200" href="{% url 'servicios' %}">
+            <span class="font-label-md text-xs sm:text-sm tracking-wide">Explorar Carta de Servicios</span>
+            <span class="material-symbols-outlined text-base">expand_more</span>
+          </a>
+        </div>
+
+        <!-- 3 Badges de Garantía ERS -->
+        <div class="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="flex items-center space-x-3 bg-white/60 dark:bg-[#14131f]/70 backdrop-blur-md p-3.5 rounded-2xl border border-black/5 dark:border-[#28253b] shadow-sm">
+            <div class="w-9 h-9 rounded-full bg-neutral-100 dark:bg-[#252236] flex items-center justify-center shrink-0 text-[#a402c4] dark:text-[#d4bbff]">
+              <span class="material-symbols-outlined text-lg">lock_open</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-xs text-neutral-900 dark:text-[#f2e6ff] font-semibold">Sin registro</span>
+              <span class="font-body-sm text-neutral-500 dark:text-[#958e9d] text-[11px]">Cero contraseñas</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3 bg-white/60 dark:bg-[#14131f]/70 backdrop-blur-md p-3.5 rounded-2xl border border-black/5 dark:border-[#28253b] shadow-sm">
+            <div class="w-9 h-9 rounded-full bg-neutral-100 dark:bg-[#252236] flex items-center justify-center shrink-0 text-[#a402c4] dark:text-[#d4bbff]">
+              <span class="material-symbols-outlined text-lg">search_off</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-xs text-neutral-900 dark:text-[#f2e6ff] font-semibold">Tiempo real</span>
+              <span class="font-body-sm text-neutral-500 dark:text-[#958e9d] text-[11px]">Cupos actualizados</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3 bg-white/60 dark:bg-[#14131f]/70 backdrop-blur-md p-3.5 rounded-2xl border border-black/5 dark:border-[#28253b] shadow-sm">
+            <div class="w-9 h-9 rounded-full bg-neutral-100 dark:bg-[#252236] flex items-center justify-center shrink-0 text-[#a402c4] dark:text-[#d4bbff]">
+              <span class="material-symbols-outlined text-lg">mark_email_read</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-xs text-neutral-900 dark:text-[#f2e6ff] font-semibold">Inmediata</span>
+              <span class="font-body-sm text-neutral-500 dark:text-[#958e9d] text-[11px]">SMS &amp; Email con código</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Composición Editorial y Emblema de Autor -->
+      <div class="lg:col-span-5 relative flex justify-center items-center">
+        <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-black/10 dark:border-[#342f4c] bg-neutral-900">
+          <img class="w-full h-full object-cover" alt="Atmósfera Ro Studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB31dyPTHoHgvM3S95ZGPnsc3hQnMGhiOZVSONUvD4ABtlA-CwWM89e7aOPUhDRP9wn0lhhKg0CqmEAd6m6Vcth5Q517tfbIzV7RtSLSQ_9WUGRQ5Aa37M5Xb5Mkvg8KzuW3fXLUviu7Pr9JK0utksOw4wO8MQIAAolHcAgqpwXZO-lpi2cZP64lVd3vUqb2AaPbEjxxtHaTNxN50vzEgiMvGRBlhy--SRK4NbfYGY">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+          <!-- Insignia Flotante con Logo Oficial -->
+          <div class="absolute top-6 right-6 bg-[#0a0a10]/90 backdrop-blur-md p-3.5 rounded-2xl border border-[#3b3554] shadow-xl flex items-center space-x-3 max-w-[210px]">
+            <div class="w-11 h-11 rounded-full bg-black flex items-center justify-center overflow-hidden p-0.5 shrink-0 ring-1 ring-[#b388ff]/50">
+              <img alt="Ro Studio Logo" class="h-full w-full object-contain filter drop-shadow-[0_0_6px_rgba(212,187,255,0.8)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGPjmvcmoew37DoUDiqSwPe6cHfiY07G4ofwoVp-nPEjsEtxPzTqrVR3X4jXunZfOg8vXa1mL_3FyWu_EzXvAXJ3V02C54eajwK7Vf7HA1_I31dEhVY_nJWPnJ42EBzkLJKPWDkxV0dAP2zhu-vL8PYjQP9HgsUTYzh8mvgobCf-eH35HAaHt2nUUYmF0uPiw6YJQg-nn2kzcewyH_UH96aaSlAv9-4eSYSd5yaUTq1CPgBmAmzcgw">
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-xs text-[#d4bbff] uppercase font-bold tracking-wider">Ro Studio</span>
+              <span class="font-body-sm text-neutral-300 text-[10px] leading-tight">Estética Integral</span>
+            </div>
+          </div>
+
+          <!-- Mini Tarjeta de Reservación Rápida Flotante -->
+          <div class="absolute bottom-6 left-6 right-6 bg-[#0e0e16]/90 backdrop-blur-md p-4 rounded-2xl border border-[#2e2a42] shadow-2xl flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-3 h-3 rounded-full bg-[#f6adff] animate-ping"></div>
+              <div class="flex flex-col">
+                <span class="font-label-sm text-xs text-white font-medium">Atención Exclusiva</span>
+                <span class="font-body-sm text-[#ccc3d4] text-[11px]">Solo 4 turnos restantes hoy</span>
+              </div>
+            </div>
+            <a class="bg-gradient-to-r from-[#b388ff] to-[#d4bbff] text-[#260058] text-xs font-label-md font-semibold px-3.5 py-2 rounded-full hover:brightness-110 transition-all shadow-sm" href="{% url 'reserva' %}">
+              Elegir hora
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRES CATEGORÍAS EXCLUSIVAS (ESTRICTAMENTE SOLO 3 SEGÚN ERS) -->
+  <section class="w-full px-4 sm:px-8 lg:px-12 py-16 bg-neutral-100/50 dark:bg-[#0e0d16]/70 border-y border-black/5 dark:border-[#1f1d2e] transition-colors duration-500">
+    <div class="max-w-7xl mx-auto space-y-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between space-y-4 md:space-y-0">
+        <div class="space-y-2 max-w-xl">
+          <div class="flex items-center space-x-2">
+            <span class="text-[#d4bbff] text-sm">✦</span>
+            <span class="font-label-md text-xs uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff]">Tratamientos Exclusivos ERS</span>
+          </div>
+          <h2 class="font-headline-lg text-3xl sm:text-4xl text-[#400688] dark:text-[#f8f5ff] font-normal">Nuestras 3 Áreas de Especialidad</h2>
+          <p class="font-body-md text-sm sm:text-base text-neutral-600 dark:text-[#ccc3d4]">Un colectivo de 3 artistas independientes dedicadas con exclusividad a su disciplina. Elige tu especialista y coordina atención directa en tu propio domicilio o en su atelier privado.</p>
+        </div>
+        <div class="inline-flex items-center space-x-2 text-[#a402c4] dark:text-[#d4bbff] font-label-md text-xs tracking-wider">
+          <span>Reserva directa en 1 clic</span>
+          <span class="material-symbols-outlined text-base">auto_awesome</span>
+        </div>
+      </div>
+
+      <!-- Grid de las 3 Tarjetas -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Tarjeta 1: Uñas -->
+        <div class="group bg-white dark:bg-[#13121e] rounded-3xl overflow-hidden border border-black/5 dark:border-[#28243b] shadow-md hover:shadow-2xl hover:border-[#b388ff]/40 transition-all duration-300 flex flex-col transform hover:-translate-y-1.5">
+          <div class="relative h-64 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Uñas & Manicura" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLUXyJB5cXVwjd2yC3DUPs7IjDCzXILi1EE-G2urvHIoDa7gW1DSJ8Qmhsja6MpKOTkqhRkzSniExk4DHaaaYq0i3gacBJ0CMoUi3fK7un7eBpqYvn04Z3v-wyNAeCLyYqLGlyEVnaOg5SE3Erx867B3F0hIwiJoQaanpjEIFJzgV_Lfc2yrBual122q_l_igZgdPdGo4SwEZS8126SqVtYZtPo0KahGCrEPqFE2o">
+            <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3.5 py-1 rounded-full flex items-center space-x-1.5 border border-white/10 shadow-sm">
+              <span class="text-sm">💅</span>
+              <span class="font-label-sm text-xs text-white font-semibold tracking-wider uppercase">Uñas</span>
+            </div>
+            <div class="absolute bottom-4 right-4 bg-gradient-to-r from-[#6c1c2e] to-[#a402c4] dark:from-[#b388ff] dark:to-[#d4bbff] text-white dark:text-[#260058] px-3.5 py-1 rounded-full text-xs font-label-md font-semibold shadow-md">
+              Desde {{ precio_desde_unas }}
+            </div>
+          </div>
+          <div class="p-6 lg:p-8 flex-1 flex flex-col justify-between space-y-6">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-headline-md text-2xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Manicura &amp; Pedicura</h3>
+                <span class="font-body-sm text-xs text-[#a402c4] dark:text-[#d4bbff] flex items-center space-x-1">
+                  <span class="material-symbols-outlined text-sm">schedule</span>
+                  <span>45 - 75 min</span>
+                </span>
+              </div>
+              <p class="font-body-sm text-xs sm:text-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed">
+                Manicure tradicional, permanente con secado LED no invasivo, Nail Art de autor y Pedicure spa con sales marinas.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-1.5">
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Tradicional</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Permanente</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Nail Art Autor</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Pedicure Spa</span>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between">
+              <a class="w-full inline-flex items-center justify-center space-x-2 bg-neutral-100 dark:bg-[#1b1928] hover:bg-[#6c1c2e] hover:text-white dark:hover:bg-[#b388ff] dark:hover:text-[#260058] text-neutral-900 dark:text-[#e4e1e9] px-5 py-3 rounded-full font-label-md text-xs font-semibold tracking-wider uppercase transition-colors duration-200 border border-black/5 dark:border-[#2e2a42]" href="{% url 'reserva' %}">
+                <span>Ver servicios &amp; Reservar</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Pelo -->
+        <div class="group bg-white dark:bg-[#13121e] rounded-3xl overflow-hidden border border-black/5 dark:border-[#28243b] shadow-md hover:shadow-2xl hover:border-[#b388ff]/40 transition-all duration-300 flex flex-col transform hover:-translate-y-1.5">
+          <div class="relative h-64 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Estilismo Capilar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqv8NTKb0y7n-tQ2HSBiE8TEeMl1bDNvOizqL4rQhvvgscahdVNT48huxle43N6Krd9-J_CBD2p3_qJPTp2Nxnes_TQ643tUBXmMcniAyzc_YOIKOmakU2TXdDA78RaZ62Cgf327yXnCQklmF9c9aP_PJpQg-qiN7ltUKyYQnJ8EsrNrFCIcYBoqd5cuiaMQBwYnbdVCsOsetzT0aM_nVXjcOAdS851Xgfw703C0Y">
+            <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3.5 py-1 rounded-full flex items-center space-x-1.5 border border-white/10 shadow-sm">
+              <span class="text-sm">💇</span>
+              <span class="font-label-sm text-xs text-white font-semibold tracking-wider uppercase">Pelo</span>
+            </div>
+            <div class="absolute bottom-4 right-4 bg-gradient-to-r from-[#6c1c2e] to-[#a402c4] dark:from-[#b388ff] dark:to-[#d4bbff] text-white dark:text-[#260058] px-3.5 py-1 rounded-full text-xs font-label-md font-semibold shadow-md">
+              Desde {{ precio_desde_pelo }}
+            </div>
+          </div>
+          <div class="p-6 lg:p-8 flex-1 flex flex-col justify-between space-y-6">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-headline-md text-2xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Estilismo Capilar</h3>
+                <span class="font-body-sm text-xs text-[#a402c4] dark:text-[#d4bbff] flex items-center space-x-1">
+                  <span class="material-symbols-outlined text-sm">schedule</span>
+                  <span>40 - 90 min</span>
+                </span>
+              </div>
+              <p class="font-body-sm text-xs sm:text-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed">
+                Cortes de autor según morfología facial, brushing con brillo gloss botánico, lavado sensorial relajante y recogidos de gala.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-1.5">
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Corte Autor</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Brushing</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Lavado &amp; Peinado</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Peinados de Gala</span>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between">
+              <a class="w-full inline-flex items-center justify-center space-x-2 bg-neutral-100 dark:bg-[#1b1928] hover:bg-[#6c1c2e] hover:text-white dark:hover:bg-[#b388ff] dark:hover:text-[#260058] text-neutral-900 dark:text-[#e4e1e9] px-5 py-3 rounded-full font-label-md text-xs font-semibold tracking-wider uppercase transition-colors duration-200 border border-black/5 dark:border-[#2e2a42]" href="{% url 'reserva' %}">
+                <span>Ver servicios &amp; Reservar</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Maquillaje -->
+        <div class="group bg-white dark:bg-[#13121e] rounded-3xl overflow-hidden border border-black/5 dark:border-[#28243b] shadow-md hover:shadow-2xl hover:border-[#b388ff]/40 transition-all duration-300 flex flex-col transform hover:-translate-y-1.5">
+          <div class="relative h-64 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Maquillaje de Autor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBif5Q0-egjOgJjtxKcQlAWbw0KUjP8biVO-91IWHQ8L0icPVpyLzccdVJBJjU6gTebPSEuCF-uMuBTXhXgWbBLkTtONHXHLbzN7KLZLI-Ormfyw3wKAglqzCulZryPGzj8SoVZX4mE7Fo0jvnffXHnwRZ0FcquU-EXbRYWuBGwsjCtwrBOJm3a8t5IVR2ljsXVAWkLbLJyEBkG6Qw_D6JG7_JBa54gJM9CMG5Iptg">
+            <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3.5 py-1 rounded-full flex items-center space-x-1.5 border border-white/10 shadow-sm">
+              <span class="text-sm">💄</span>
+              <span class="font-label-sm text-xs text-white font-semibold tracking-wider uppercase">Maquillaje</span>
+            </div>
+            <div class="absolute bottom-4 right-4 bg-gradient-to-r from-[#6c1c2e] to-[#a402c4] dark:from-[#b388ff] dark:to-[#d4bbff] text-white dark:text-[#260058] px-3.5 py-1 rounded-full text-xs font-label-md font-semibold shadow-md">
+              Desde {{ precio_desde_maq }}
+            </div>
+          </div>
+          <div class="p-6 lg:p-8 flex-1 flex flex-col justify-between space-y-6">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-headline-md text-2xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Maquillaje de Autor</h3>
+                <span class="font-body-sm text-xs text-[#a402c4] dark:text-[#d4bbff] flex items-center space-x-1">
+                  <span class="material-symbols-outlined text-sm">schedule</span>
+                  <span>50 - 120 min</span>
+                </span>
+              </div>
+              <p class="font-body-sm text-xs sm:text-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed">
+                Maquillaje social de día con acabado natural, fiesta nocturna con larga duración fijada, y pack completo para eventos nupciales.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-1.5">
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Social de Día</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Fiesta Noche</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Eventos VIP</span>
+                <span class="bg-neutral-100 dark:bg-[#1f1d2c] text-neutral-700 dark:text-[#ccc3d4] px-2.5 py-1 rounded-md text-xs font-label-sm border border-black/5 dark:border-[#2a273b]">Novias &amp; Atelier</span>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between">
+              <a class="w-full inline-flex items-center justify-center space-x-2 bg-neutral-100 dark:bg-[#1b1928] hover:bg-[#6c1c2e] hover:text-white dark:hover:bg-[#b388ff] dark:hover:text-[#260058] text-neutral-900 dark:text-[#e4e1e9] px-5 py-3 rounded-full font-label-md text-xs font-semibold tracking-wider uppercase transition-colors duration-200 border border-black/5 dark:border-[#2e2a42]" href="{% url 'reserva' %}">
+                <span>Ver servicios &amp; Reservar</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA NUESTRO SISTEMA DE RESERVA RÁPIDA -->
+  <section class="w-full px-4 sm:px-8 lg:px-12 py-20 relative overflow-hidden transition-colors duration-500">
+    <div class="max-w-7xl mx-auto space-y-16">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <span class="font-label-md text-xs uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff]">✦ Experiencia sin fricciones ✦</span>
+        <h2 class="font-headline-lg text-3xl sm:text-4xl text-[#400688] dark:text-[#f8f5ff] font-normal">¿Cómo funciona nuestro sistema de reserva rápida?</h2>
+        <p class="font-body-md text-sm sm:text-base text-neutral-600 dark:text-[#ccc3d4]">
+          Diseñado para tu comodidad: sin formularios interminables, sin recordar contraseñas, en solo 4 pasos intuitivos.
+        </p>
+      </div>
+
+      <!-- Pasos 1 al 4 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        <div class="bg-white dark:bg-[#13121e] p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm hover:border-[#b388ff]/40 transition-all flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-[#201d30] border border-black/5 dark:border-[#38334e] flex items-center justify-center text-[#6c1c2e] dark:text-[#d4bbff] font-headline-md font-serif font-bold text-xl">
+              01
+            </div>
+            <h4 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff]">Selecciona tu tratamiento</h4>
+            <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed text-xs sm:text-sm">
+              Escoge entre manicura, estilismo o maquillaje según el look que desees alcanzar.
+            </p>
+          </div>
+          <div class="pt-4 flex items-center space-x-2 text-[#a402c4] dark:text-[#d4bbff] font-label-sm text-xs">
+            <span class="material-symbols-outlined text-base">brush</span>
+            <span>Uñas, pelo o rostro</span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-[#13121e] p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm hover:border-[#b388ff]/40 transition-all flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-[#201d30] border border-black/5 dark:border-[#38334e] flex items-center justify-center text-[#6c1c2e] dark:text-[#d4bbff] font-headline-md font-serif font-bold text-xl">
+              02
+            </div>
+            <h4 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff]">Escoge fecha y horario</h4>
+            <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed text-xs sm:text-sm">
+              Consulta en tiempo real la disponibilidad y elige el bloque que mejor se ajuste a tu día.
+            </p>
+          </div>
+          <div class="pt-4 flex items-center space-x-2 text-[#a402c4] dark:text-[#d4bbff] font-label-sm text-xs">
+            <span class="material-symbols-outlined text-base">calendar_today</span>
+            <span>Huecos actualizados al instante</span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-[#13121e] p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm hover:border-[#b388ff]/40 transition-all flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-[#201d30] border border-black/5 dark:border-[#38334e] flex items-center justify-center text-[#6c1c2e] dark:text-[#d4bbff] font-headline-md font-serif font-bold text-xl">
+              03
+            </div>
+            <h4 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff]">Solo 3 datos de contacto</h4>
+            <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed text-xs sm:text-sm">
+              Ingresa solo tu nombre, teléfono y correo electrónico. Sin necesidad de crearte cuenta.
+            </p>
+          </div>
+          <div class="pt-4 flex items-center space-x-2 text-[#a402c4] dark:text-[#d4bbff] font-label-sm text-xs">
+            <span class="material-symbols-outlined text-base">contact_mail</span>
+            <span>Cero contraseñas requeridas</span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-[#13121e] p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm hover:border-[#b388ff]/40 transition-all flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-[#201d30] border border-black/5 dark:border-[#38334e] flex items-center justify-center text-[#6c1c2e] dark:text-[#d4bbff] font-headline-md font-serif font-bold text-xl">
+              04
+            </div>
+            <h4 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff]">¡Cita confirmada!</h4>
+            <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] leading-relaxed text-xs sm:text-sm">
+              Recibirás un SMS y correo inmediato con el código único de cita para modificarla o cancelarla si lo necesitas.
+            </p>
+          </div>
+          <div class="pt-4 flex items-center space-x-2 text-[#a402c4] dark:text-[#d4bbff] font-label-sm text-xs">
+            <span class="material-symbols-outlined text-base">check_circle</span>
+            <span>Código de reserva directo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de llamada a la acción en el flujo -->
+      <div class="p-8 lg:p-10 rounded-3xl bg-gradient-to-r from-[#6c1c2e] via-[#8a3344] to-[#400688] dark:from-[#2a0e4a] dark:via-[#421773] dark:to-[#170a2a] text-white flex flex-col md:flex-row items-center justify-between shadow-2xl border border-black/5 dark:border-[#532688]/40 space-y-6 md:space-y-0">
+        <div class="space-y-1 text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start space-x-2 text-[#f6adff]">
+            <span class="text-xs">✦</span>
+            <span class="font-label-sm text-xs uppercase tracking-widest">Reserva Premium Ro Studio</span>
+          </div>
+          <h3 class="font-headline-md text-2xl lg:text-3xl font-normal text-white">¿Lista para tu momento de relajación?</h3>
+          <p class="font-body-sm text-[#fed6ff] text-xs sm:text-sm">Elige tu horario hoy mismo y déjate cuidar por especialistas.</p>
+        </div>
+        <a class="bg-white dark:bg-[#d4bbff] text-[#400688] dark:text-[#260058] font-label-md font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-full hover:scale-105 transition-all shadow-xl" href="{% url 'reserva' %}">
+          Comenzar Reserva (2 min)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN, HORARIOS Y GESTIÓN DE CITAS SEGÚN ERS -->
+  <section class="w-full px-4 sm:px-8 lg:px-12 py-16 bg-neutral-100/50 dark:bg-[#0e0d16]/70 border-t border-black/5 dark:border-[#1f1d2e] transition-colors duration-500">
+    <div class="max-w-7xl mx-auto space-y-12">
+      <div class="space-y-2">
+        <div class="flex items-center space-x-2">
+          <span class="text-[#d4bbff] text-sm">✦</span>
+          <span class="font-label-md text-xs uppercase tracking-widest text-[#7c572c] dark:text-[#d4bbff]">Modalidad Itinerante &amp; Cobertura</span>
+        </div>
+        <h2 class="font-headline-lg text-3xl sm:text-4xl text-[#400688] dark:text-[#f8f5ff] font-normal">Atención a Domicilio &amp; Estudios Privados</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Mapa / Estudio Visual -->
+        <div class="lg:col-span-5 flex flex-col space-y-6">
+          <div class="w-full rounded-3xl bg-[#13121e] shadow-md relative overflow-hidden p-6 lg:p-8 border border-black/5 dark:border-[#2a263d] space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-full bg-[#b388ff]/20 flex items-center justify-center text-[#d4bbff]">
+                  <span class="material-symbols-outlined text-2xl">home_pin</span>
+                </div>
+                <div>
+                  <span class="font-label-md text-sm text-neutral-900 dark:text-white block font-semibold">Modalidad Itinerante Ro Studio</span>
+                  <span class="font-body-sm text-[#ccc3d4] text-xs">Sin local comercial abierto al público</span>
+                </div>
+              </div>
+              <span class="bg-neutral-100 dark:bg-[#1f1d2c] border border-[#2e2a42] px-3 py-1 rounded-full text-xs font-label-sm text-[#d4bbff]">A tu medida</span>
+            </div>
+
+            <div class="space-y-4 pt-2">
+              <div class="p-4 rounded-2xl bg-neutral-50 dark:bg-[#191726] border border-black/5 dark:border-[#28253b] space-y-1.5">
+                <div class="flex items-center space-x-2 text-[#f6adff]">
+                  <span class="material-symbols-outlined text-base">room_service</span>
+                  <span class="font-label-md text-xs font-semibold uppercase tracking-wider">Opción 1: A tu Domicilio</span>
+                </div>
+                <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] text-xs leading-relaxed">La especialista traslada su maletín técnico completo, aparatología portátil y cosmética premium directo a tu hogar u hotel con puntualidad rigurosa.</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-neutral-50 dark:bg-[#191726] border border-black/5 dark:border-[#28253b] space-y-1.5">
+                <div class="flex items-center space-x-2 text-[#d4bbff]">
+                  <span class="material-symbols-outlined text-base">apartment</span>
+                  <span class="font-label-md text-xs font-semibold uppercase tracking-wider">Opción 2: Atelier / Estudio Privado</span>
+                </div>
+                <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] text-xs leading-relaxed">Si prefieres salir de casa, puedes ser recibida en el estudio residencial íntimo de cada artista (dirección exacta confirmada en tu código de reserva).</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#a402c4]/10 border border-[#6a1b9a]/40 flex items-center space-x-3">
+              <span class="material-symbols-outlined text-[#f6adff] text-xl shrink-0">explore</span>
+              <span class="font-body-sm text-xs text-[#e4e1e9]">Área de cobertura: Toda la zona metropolitana y alrededores (sin recargo en radio céntrico).</span>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#13121e] p-6 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="font-label-sm text-xs text-[#7c572c] dark:text-[#d4bbff] uppercase font-bold tracking-wider">Contacto &amp; Coordinación</span>
+              <span class="font-body-sm text-neutral-500 dark:text-[#a09baa] text-xs">Respuesta en &lt; 15 min</span>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-neutral-100 dark:bg-[#201d30] flex items-center justify-center text-[#6c1c2e] dark:text-[#d4bbff]">
+                  <span class="material-symbols-outlined text-lg">call</span>
+                </div>
+                <div>
+                  <span class="font-title-md text-base text-neutral-900 dark:text-white block font-semibold">+34 934 81 22 90</span>
+                  <span class="font-body-sm text-neutral-500 dark:text-[#a09baa] text-xs">Coordinación directa de visitas</span>
+                </div>
+              </div>
+              <a class="bg-[#fdcb97] dark:bg-[#2e1240] text-[#78542a] dark:text-[#f6adff] border border-black/5 dark:border-[#6a1b9a]/50 font-label-md px-4 py-2 rounded-full hover:bg-[#eebe8a] dark:hover:bg-[#46128d] transition-colors text-xs flex items-center space-x-1.5" href="https://wa.me/" rel="noopener" target="_blank">
+                <span class="material-symbols-outlined text-sm">chat</span>
+                <span>WhatsApp Directo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabla de Horarios y Cancelación con Código ERS -->
+        <div class="lg:col-span-7 flex flex-col space-y-6">
+          <div class="bg-white dark:bg-[#13121e] p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <span class="material-symbols-outlined text-[#6c1c2e] dark:text-[#d4bbff] text-2xl">schedule</span>
+                <h3 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff] font-medium">Horarios Semanales de Atención</h3>
+              </div>
+              <span class="bg-neutral-100 dark:bg-[#1f1d2c] border border-black/5 dark:border-[#2e2a42] px-3 py-1 rounded-full text-xs font-label-sm text-neutral-600 dark:text-[#ccc3d4]">Zona CET / Santiago</span>
+            </div>
+            <div class="space-y-3 font-body-sm text-xs sm:text-sm">
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-50 dark:bg-[#191726]">
+                <span class="font-medium text-neutral-900 dark:text-white">Lunes a Jueves</span>
+                <span class="text-neutral-600 dark:text-[#ccc3d4] font-mono">09:00 – 19:00 hrs</span>
+              </div>
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-50 dark:bg-[#191726]">
+                <span class="font-medium text-neutral-900 dark:text-white">Viernes (Horario extendido)</span>
+                <span class="font-mono font-semibold text-[#6c1c2e] dark:text-[#d4bbff]">09:00 – 20:00 hrs</span>
+              </div>
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-50 dark:bg-[#191726]">
+                <span class="font-medium text-neutral-900 dark:text-white">Sábado</span>
+                <span class="text-neutral-600 dark:text-[#ccc3d4] font-mono">10:00 – 18:00 hrs</span>
+              </div>
+              <div class="flex items-center justify-between py-2.5 px-3 rounded-xl bg-neutral-100 dark:bg-[#1f1d2d]">
+                <span class="font-medium text-neutral-500 dark:text-[#a09baa]">Domingo</span>
+                <span class="text-red-600 dark:text-[#ffb4ab] font-medium">Cerrado (Solo sesiones nupciales exclusivas)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Módulo Interactivo: Cancelar o Modificar con Código Único (ERS Feature) -->
+          <div class="bg-white dark:bg-[#13121e] p-6 lg:p-8 rounded-3xl border border-black/5 dark:border-[#28243b] shadow-sm space-y-4">
+            <div class="flex items-center space-x-3">
+              <span class="material-symbols-outlined text-[#a402c4] dark:text-[#d4bbff] text-2xl">key</span>
+              <div>
+                <h4 class="font-headline-sm text-xl text-neutral-900 dark:text-[#f8f5ff] font-medium">¿Tienes una cita y necesitas gestionarla?</h4>
+                <p class="font-body-sm text-neutral-600 dark:text-[#ccc3d4] text-xs sm:text-sm">
+                  Sin registrarte: ingresa el código alfanumérico enviado a tu correo o SMS para reprogramar o cancelar.
+                </p>
+              </div>
+            </div>
+            <form action="{% url 'contacto' %}" method="get" class="pt-2 flex flex-col sm:flex-row gap-3">
+              <input class="flex-1 bg-neutral-50 dark:bg-[#191726] border border-black/10 dark:border-[#2e2a42] px-4 py-3 rounded-full text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-[#958e9d] font-label-md outline-none focus:ring-2 focus:ring-[#b388ff] transition-all text-xs sm:text-sm" placeholder="Ej: RO-8942" required type="text" name="codigo_buscar">
+              <button class="bg-gradient-to-r from-[#6c1c2e] to-[#8a3344] dark:from-[#b388ff] dark:to-[#d4bbff] text-white dark:text-[#260058] px-6 py-3 rounded-full font-label-md text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition-opacity shrink-0" type="submit">
+                Buscar mi Cita
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

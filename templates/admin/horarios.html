@@ -1,0 +1,54 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Agenda de Horarios — Administración Ro Studio{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-white">Disponibilidad &amp; Horarios</h1>
+      <p class="text-xs text-neutral-400">Inspección de turnos y citas asignadas por fecha.</p>
+    </div>
+    <form method="get" action="{% url 'admin_horarios' %}" class="flex items-center space-x-2">
+      <input type="date" name="fecha" value="{{ fecha_obj|date:'Y-m-d' }}" onchange="this.form.submit()" class="bg-[#1b1b24] border border-white/10 px-3 py-1.5 rounded-xl text-xs text-white outline-none focus:border-primary">
+    </form>
+  </div>
+
+  <div class="bg-[#13131c] border border-white/10 rounded-2xl p-6">
+    <div class="pb-4 border-b border-white/5 mb-6 flex items-center justify-between">
+      <span class="text-sm font-semibold text-white">Agenda para el {{ fecha_obj|date:"d M Y" }}</span>
+      <span class="text-xs text-secondary">{{ reservas_dia.count }} citas programadas</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for h in horarios_estandar %}
+      <div class="p-4 rounded-xl border border-white/5 bg-[#191924]/60">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-mono text-base font-bold text-primary">{{ h }} hrs</span>
+          {% with cita=reservas_dia|dictsort:"hora" %}
+            {# check if this hour has bookings #}
+          {% endwith %}
+        </div>
+        
+        <div class="space-y-2 mt-2">
+          {% for r in reservas_dia %}
+            {% if r.hora == h %}
+            <div class="p-2.5 rounded-lg bg-surface-container border border-primary/30 text-xs">
+              <span class="font-bold text-white block">{{ r.nombre_completo }}</span>
+              <span class="text-[11px] text-secondary block">{{ r.servicio.nombre }}</span>
+              <span class="text-[10px] text-neutral-400 block mt-1 capitalize">{{ r.get_modalidad_display }} • {{ r.telefono }}</span>
+            </div>
+            {% endif %}
+          {% empty %}
+          {% endfor %}
+          
+          <div class="text-[11px] text-neutral-500 pt-1">
+            Bloque estándar de atención
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

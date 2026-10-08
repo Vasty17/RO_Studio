@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{% block title %}Administración — Ro Studio{% endblock %}</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#0e0e14",
+            "surface-container": "#191922",
+            "surface-card": "#13131c",
+            "primary": "#d4bbff",
+            "primary-container": "#b388ff",
+            "secondary": "#f6adff",
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0a0a10] text-[#e4e1e9] font-sans min-h-screen flex flex-col">
+  <!-- Admin Navbar -->
+  <header class="w-full bg-[#12121a] border-b border-white/10 px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <div class="h-9 w-9 rounded-full bg-black ring-1 ring-primary flex items-center justify-center p-1">
+        <span class="text-primary font-bold text-sm">RO</span>
+      </div>
+      <div>
+        <span class="font-bold text-sm text-white tracking-wider">PANEL ADMINISTRATIVO</span>
+        <span class="text-xs text-secondary block font-mono">Ro Studio • Gestión Protegida</span>
+      </div>
+    </div>
+    <nav class="flex items-center space-x-2 text-xs">
+      <a href="{% url 'admin_dashboard' %}" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 {% if request.resolver_match.url_name == 'admin_dashboard' %}bg-primary/20 text-primary font-bold{% else %}text-neutral-400{% endif %}">Dashboard</a>
+      <a href="{% url 'admin_reservas' %}" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 {% if request.resolver_match.url_name == 'admin_reservas' %}bg-primary/20 text-primary font-bold{% else %}text-neutral-400{% endif %}">Reservas</a>
+      <a href="{% url 'admin_servicios' %}" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 {% if request.resolver_match.url_name == 'admin_servicios' %}bg-primary/20 text-primary font-bold{% else %}text-neutral-400{% endif %}">Servicios</a>
+      <a href="{% url 'admin_horarios' %}" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 {% if request.resolver_match.url_name == 'admin_horarios' %}bg-primary/20 text-primary font-bold{% else %}text-neutral-400{% endif %}">Horarios</a>
+      <a href="{% url 'inicio' %}" target="_blank" class="px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white flex items-center gap-1">Ver Sitio <span class="material-symbols-outlined text-xs">open_in_new</span></a>
+      <a href="{% url 'admin_logout' %}" class="px-3 py-1.5 rounded-lg bg-red-950/60 border border-red-800 text-red-300 hover:bg-red-900 text-xs">Salir</a>
+    </nav>
+  </header>
+
+  <main class="flex-1 p-6 sm:p-10 max-w-7xl mx-auto w-full">
+    {% if messages %}
+      {% for msg in messages %}
+      <div class="mb-6 p-4 rounded-xl bg-primary/20 border border-primary/40 text-primary text-xs flex items-center space-x-2">
+        <span class="material-symbols-outlined text-base">check_circle</span>
+        <span>{{ msg }}</span>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Ro Studio — Estética Integral",
+  "description": "Aplicación Django tradicional con rutas reales para Ro Studio: estética integral, catálogo de servicios, reservas con protección de concurrencia y panel administrativo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
