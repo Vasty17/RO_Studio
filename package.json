@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "python3 run_dev.py",
     "start": "python3 run_dev.py",
-    "build": "python3 manage.py check",
+    "build": "vite build && python3 manage.py check",
     "preview": "python3 run_dev.py",
     "clean": "rm -rf dist server.js",
     "lint": "python3 manage.py check"
